@@ -44,19 +44,19 @@ $(document).ready(function () {
     });
     $('#navbarDropdownMenuLink_2').on('click', function(e){
         e.preventDefault();
-        window.location.pathname = "/bga-events-finder/finder/tool.html";
+        window.location.pathname = "/bga-events-finder-2/finder/tool.html";
     });
     $('#navbarDropdownMenuLink_3').on('click', function(e){
         e.preventDefault();
-        window.location.pathname = "/bga-events-finder/expertise-and-advice.html";
+        window.location.pathname = "/bga-events-finder-2/expertise-and-advice.html";
     });
     $('#navbarDropdownMenuLink_4').on('click', function(e){
         e.preventDefault();
-        window.location.pathname = "/bga-events-finder/events/events-finder.html";
+        window.location.pathname = "/bga-events-finder-2/events/events-finder.html";
     });
     $('#navbarDropdownMenuLink_5').on('click', function(e){
         e.preventDefault();
-        window.location.pathname = "/bga-events-finder/news.html";
+        window.location.pathname = "/bga-events-finder-2/news.html";
     }); 
 
     // Mobile nav (for the moble test version only)
@@ -68,11 +68,11 @@ $(document).ready(function () {
     
     $('.mobile-test #navbarDropdownMenuLink_0').on('click', function(e){
         e.preventDefault();
-        window.location.pathname = "/bga-events-finder/registrations";     
+        window.location.pathname = "/bga-events-finder-2/registrations";     
     });
     $('.mobile-test #navbarDropdownMenuLink_1').on('click', function(e){
         e.preventDefault();
-        window.location.pathname = "/bga-events-finder/planning";
+        window.location.pathname = "/bga-events-finder-2/planning";
     });
     
     $('#ChangeToggle').on('click', function(){
