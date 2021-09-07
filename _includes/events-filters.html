@@ -1,0 +1,289 @@
+<div class="filters">
+    <!--<h3>Filter events</h3>-->         
+    
+    
+   <!-- EVENT TYPE TOGGLES -->
+    <div class="filter-item" id="event-type">
+
+            <form>
+                <div class="checkbox-item">
+                <label>Online events</label>
+                    <input type="checkbox" id="online-events">
+                </div>
+          
+                <div class="checkbox-item">
+                <label>In person events</label>
+                    <input type="checkbox" id="in-person-events">
+                </div>
+          
+                <div class="checkbox-item">
+                <label>past recorded events</label>
+                    <input type="checkbox" id="past-recorded-events">
+                </div>
+           </form>
+      
+    </div>
+    
+    
+    
+      
+    
+    <!-- 1. DATE -->
+    <!--<div class="filter-item" id="date">
+                    <div class="filter-item-title">
+                         <p>Date <span class="mobile-counter"></span></p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12.5" viewBox="0 0 20 12.5">
+                            <g transform="translate(20 12.5) rotate(180)">
+                                <path id="Chevron_Up" data-name="Chevron / Up" d="M10,4.965,2.478,12.5,0,10.018,10,0,20,10.018,17.522,12.5Z" fill="#333" />
+                            </g>
+                        </svg>
+
+                         </div>
+                            
+                    <div class="filter-item-content">
+
+                        <form>
+                            
+                            <div class="radio-button">
+                                <input type="radio" id="past-recorded-events" name="radio-group" checked>
+                                <label for="past-recorded-events" class="form-field">Past dates (recorded events)<div class="radio-circle"></div></label>
+                            </div>
+                            
+                            <div class="radio-button">
+                                <input type="radio" id="current-month" name="radio-group" checked>
+                                <label for="past-recorded-events" class="form-field">This month (<span class="current-month"></span>)<div class="radio-circle"></div></label>
+                            </div>
+                            
+                            <div class="radio-button">
+                                <input type="radio" id="current-month-plus-1" name="radio-group" checked>
+                                <label for="past-recorded-events" class="form-field"><span class="current-month-plus-1"></span><div class="radio-circle"></div></label>
+                            </div>
+                            
+                            <div class="radio-button">
+                                <input type="radio" id="current-month-plus-2" name="radio-group" checked>
+                                <label for="past-recorded-events" class="form-field"><span class="current-month-plus-2"></span><div class="radio-circle"></div></label>
+                            </div>
+                            
+                            <div class="radio-button">
+                                <input type="radio" id="custom-date-range" name="radio-group" checked>
+                                <label for="custom-date-range" class="form-field">Custom date range<div class="radio-circle"></div></label>
+                            </div>
+                            
+                        </form>
+                        
+                        </div>
+                    </div>-->
+    
+     <div class="filter-item" id="date">
+                    <div class="filter-item-title">
+                         <p>Date <span class="mobile-counter"></span></p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12.5" viewBox="0 0 20 12.5">
+                            <g transform="translate(20 12.5) rotate(180)">
+                                <path id="Chevron_Up" data-name="Chevron / Up" d="M10,4.965,2.478,12.5,0,10.018,10,0,20,10.018,17.522,12.5Z" fill="#333" />
+                            </g>
+                        </svg>
+
+                         </div>
+                    <div class="active-filters multi-select">
+                        <ul>
+                            <li filter-type="date" filter-value="13" data-value="past-dates">Past dates (recorded events)</li>
+                            <li filter-type="date" filter-value="25" data-value="this-month">This month (<span class="current-month"></span>)</li>
+                            <li filter-type="date" filter-value="25" data-value="this-month-plus-1"><span class="current-month-plus-1"></span></li>
+                            <li filter-type="date" filter-value="13" data-value="this-month-plus-2"><span class="current-month-plus-2"></span></li>
+                            <li filter-type="date" filter-value="13" data-value="this-month-plus-3"><span class="current-month-plus-3"></span> and further</li>
+                            
+                            
+                        </ul>
+                    </div>                
+                    <div class="filter-item-content">
+
+                        <form>
+                            <div class="checkbox-item" filter-value="13" filter-type="date">
+                            <input type="checkbox" id="past-dates">
+                            <label>Past dates (recorded events)</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="25" filter-type="date">
+                            <input type="checkbox" id="this-month">
+                            <label>This month (<span class="current-month"></span>)</label>
+                            </div> 
+                            
+                            <div class="checkbox-item" filter-value="25" filter-type="date">
+                            <input type="checkbox" id="this-month-plus-1">
+                            <label><span class="current-month-plus-1"></span></label>
+                            </div> 
+                            
+                            <div class="checkbox-item" filter-value="25" filter-type="date">
+                            <input type="checkbox" id="this-month-plus-2">
+                            <label><span class="current-month-plus-2"></span></label>
+                            </div>
+                                                        
+                            <div class="checkbox-item" filter-value="13" filter-type="date">
+                            <input type="checkbox" id="this-month-plus-3">
+                            <label><span class="current-month-plus-3"></span> and further</label>
+                            </div>  
+              
+                             
+                        </form>
+                        
+                        
+
+                        </div>
+                    </div>
+    
+    
+    
+    <!-- 2. TOPIC -->
+    <div class="filter-item" id="topic">
+                    <div class="filter-item-title">
+                         <p>Topic <span class="mobile-counter"></span></p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12.5" viewBox="0 0 20 12.5">
+                            <g transform="translate(20 12.5) rotate(180)">
+                                <path id="Chevron_Up" data-name="Chevron / Up" d="M10,4.965,2.478,12.5,0,10.018,10,0,20,10.018,17.522,12.5Z" fill="#333" />
+                            </g>
+                        </svg>
+
+                         </div>
+                    <div class="active-filters multi-select">
+                        <ul>
+                            <li filter-type="topic" filter-value="13" data-value="business-finance">Business finance</li>
+                            <li filter-type="topic" filter-value="25" data-value="business-planning">Business planning</li>
+                            <li filter-type="topic" filter-value="25" data-value="contracting-and-tendering">Contracting and tendering</li>
+                            <li filter-type="topic" filter-value="13" data-value="customer-service">Customer service</li>
+                            <li filter-type="topic" filter-value="13" data-value="digital-business">Digital business</li>
+                            <li filter-type="topic" filter-value="13" data-value="employing-people" >Employing people</li>
+                            <li filter-type="topic" filter-value="13" data-value="exporting">Exporting</li>
+                            <li filter-type="topic" filter-value="13" data-value="government-grant-programs">Government grant programs</li> 
+                            <li filter-type="topic" filter-value="13" data-value="industry-compliance">Industry compliance</li>
+                            <li filter-type="topic" filter-value="13" data-value="innovation-and-commercialisation">Innovation and commercialisation</li>
+                            <li filter-type="topic" filter-value="13" data-value="marketing">Marketing</li>
+                            <li filter-type="topic" filter-value="13" data-value="networking">Networking</li>
+                            <li filter-type="topic" filter-value="25" data-value="starting-a-business">Starting a business</li>
+                            <li filter-type="topic" filter-value="13" data-value="taxation-and-record-keeping">Taxation and record keeping</li>
+                            <li filter-type="topic" filter-value="13" data-value="work-health-and-safety">Work health and safety</li>
+                        </ul>
+                    </div>                
+                    
+        
+                    <div class="filter-item-content">
+
+                        <form>
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="business-finance">
+                            <label>Business finance</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="25" filter-type="topic">
+                            <input type="checkbox" id="business-planning">
+                            <label>Business planning</label>
+                            </div> 
+                            
+                            <div class="checkbox-item" filter-value="25" filter-type="topic">
+                            <input type="checkbox" id="contracting-and-tendering">
+                            <label>Contracting and tendering</label>
+                            </div> 
+                            
+                            <div class="checkbox-item" filter-value="25" filter-type="topic">
+                            <input type="checkbox" id="customer-service">
+                            <label>Customer service</label>
+                            </div>
+                                                        
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="digital-business">
+                            <label>Digital business</label>
+                            </div>  
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="employing-people">
+                            <label>Employing people</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="exporting">
+                            <label>Exporting</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="government-grant-programs">
+                            <label>Government grant programs</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="industry-compliance">
+                            <label>Industry compliance</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="innovation-and-commercialisation">
+                            <label>Innovation and commercialisation</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="marketing">
+                            <label>Marketing</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="networking">
+                            <label>Networking</label>
+                            </div>
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="starting-a-business">
+                            <label>Starting a business</label>
+                            </div> 
+                                                    
+                            <div class="checkbox-item" filter-value="25" filter-type="topic">
+                            <input type="checkbox" id="taxation-and-record-keeping">
+                            <label>Taxation and record keeping</label>
+                            </div>  
+                            
+                            <div class="checkbox-item" filter-value="13" filter-type="topic">
+                            <input type="checkbox" id="work-health-and-safety" >
+                            <label>Work health and safety</label>
+                            </div>
+ 
+                             
+                        </form>
+
+                        </div>
+                    </div>
+            
+    
+    <!-- 3. BUSINESS LOCATION -->
+    <div class="filter-item text-field-filter" id="postcode">
+                 
+        <div class="filter-item-title">
+            <p>Business location <span class="mobile-counter"></span></p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12.5" viewBox="0 0 20 12.5">
+                <g transform="translate(20 12.5) rotate(180)">
+                    <path id="Chevron_Up" data-name="Chevron / Up" d="M10,4.965,2.478,12.5,0,10.018,10,0,20,10.018,17.522,12.5Z" fill="#333" />
+                </g>
+            </svg>
+
+        </div>
+        
+        <div class="active-filters text-select">
+            <ul>
+                <li filter-type="postcode" filter-value="13" data-value="postcode"></li>
+            </ul>
+        </div>                
+                    
+
+        <div class="filter-item-content">
+
+            <label>Enter your business postcode</label>
+            <div class="text-field-item">
+                <input type="text" />
+                <button class="apply-postcode">Add postcode </button>
+            </div>
+
+
+
+        </div>
+              
+    </div>
+    
+                 
+    </div>
+    
