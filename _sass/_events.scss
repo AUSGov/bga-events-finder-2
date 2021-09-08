@@ -378,6 +378,10 @@
                             padding: 0;
                             margin: 0;
                             
+                            svg {
+                                margin-right: 8px;
+                            }
+                            
                             &::after {
                                 height: 30px;
                                 width: 30px;
@@ -519,7 +523,6 @@
         .search-card-result {
             border-top: none;
             padding: 0px;
-            background-color: $blue-lightest;
             margin-bottom: 32px;
             box-shadow: none;
             box-sizing: border-box;
@@ -530,6 +533,7 @@
                 padding: 24px 32px;
                 display: flex;
                 justify-content: flex-start;
+                
                 .event-type-icon {
                     margin: 8px 24px 0 0;
                 }
@@ -538,7 +542,7 @@
                     font-size: 24px;
                     margin: 0;
                     color: $white;
-                    padding: 0 0 16px 0;
+                    padding: 0 0 8px 0;
                 }
                 .date {
                     display: flex;
@@ -562,7 +566,8 @@
             }    
             .search-card-content {
                 padding: 32px;
-            
+                background-color: $blue-lightest;
+                
             .search-card-heading {
                 font-size: 21px;
                 font-weight: 600;
@@ -606,27 +611,72 @@
             .accordion.event-information {
                 margin-bottom: 16px;
                 
-                .accordion-header {
-                    padding: 0;
-                    
-                    button {
-                        background: $white url(../assets/Icon-chevron-down-blue.svg) no-repeat;
-                        background-size: 16px 10px;
-                        background-position: center right 16px;
-                        border: none;
-                        cursor: pointer;
-                        padding: 8px 40px 8px 16px;
-                        color: $blue-primary-mid;
-                        @include font-format($font-family, $font-semibold, normal);
-                        letter-spacing: 0.03rem;
+                .accordion-item {
+                    .accordion-header {
+                        padding: 0;
+
+                        button {
+                            background: $white url(../assets/Icon-chevron-down-blue.svg) no-repeat;
+                            background-size: 16px 10px;
+                            background-position: center right 16px;
+                            border: 2px solid $tool-teal;
+                            border: none;
+                            cursor: pointer;
+                            padding: 8px 40px 8px 16px;
+                            color: $blue-primary-mid;
+                            @include font-format($font-family, $font-semibold, normal);
+                            letter-spacing: 0.03rem;
+                            
+                            &:focus {
+                                border: none;
+                                outline: none;
+                            }
+                        }
                     }
-                }
-                .accordion-body {
-                    background: $white;
-                    padding: 16px;
-                    
-                    li {
-                        margin-left: 16px;
+                    .accordion-body {
+                        background: $white;
+                        padding: 16px;
+                        display: none;
+
+                        li {
+                            margin-left: 16px;
+                        }
+                    }
+
+                    &.open {
+                        background: none;
+                        border:none;
+                        
+                        .accordion-header {
+                            button {
+                                background: $white url(../assets/Icon-chevron-up-blue.svg) no-repeat;
+                                background-size: 16px 10px;
+                                background-position: center right 16px;
+                            }
+                        }
+                        .accordion-body {
+                            button {
+                                background: none;
+                                border: none;
+                                padding: 0;
+                                color: $blue-primary-mid;
+                                @include font-format($font-family, $font-semibold, normal);
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                
+                                svg {
+                                    margin-right: 8px;
+                                    height: 16px;
+                                    width: 16px;
+                                    
+                                }
+                                
+                                &:hover {
+                                    border-bottom: solid 2px $blue-primary-mid;
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -642,9 +692,6 @@
                 font-family: "Open Sans", sans-serif;
                 line-height: 24px;
                 box-shadow: 0 .125rem .375rem 0 rgba(0, 0, 0, .1);
-                transition-duration: 0.4s, 0.4s;
-                transition-timing-function: ease, ease;
-                transition-delay: 0s, 0s;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -654,65 +701,92 @@
                 font-family: "Open Sans", sans-serif;
                 text-decoration: none;
                 width: 190px;
-            }
-            .primary-button:hover,
-            .primary-button:focus {
-                cursor: pointer;
-                border: 2px solid #18335c;
-                background: #254f90;
-                box-shadow: 0 .125rem .375rem 0 rgba(0, 0, 0, .3);
-                outline: none;
-            }
-            .primary-button:hover {
-                transform: translateY(-3px);
-            }
-            .primary-button:active {
-                background-color: #18335c;
-                border: solid 2px #18335c;
-                transition: box-shadow 0.1s ease, transform 0.1s ease;
-                transform: translate(0, -2px);
-                color: #ffffff;
-            }
-            .primary-button .svg-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-               margin-left: 16px;
-                width: 16px;
-                height: 16px;
-            }
-            .primary-button .svg-container svg {
-                fill: #fff;
-            }
-            .primary-button.primary-button-light .svg-container svg {
-                fill: #254f90;
-            }
-            .primary-button.primary-button-light:hover .svg-container svg,
-            .primary-button.primary-button-light:focus .svg-container svg {
-                transition-duration: 0.4s, 0.4s;
-                transition-timing-function: ease, ease;
-                transition-delay: 0s, 0s;
-                fill: #fff;
+                position: relative;
+
+                &:hover,
+                &:focus {
+                    cursor: pointer;
+                    border: 2px solid #18335c;
+                    background: #254f90;
+                    box-shadow: 0 .125rem .375rem 0 rgba(0, 0, 0, .3);
+                    outline: none;
+                }
+                &:active {
+                    background-color: #18335c;
+                    border: solid 2px #18335c;
+                    color: #ffffff;
+                }
+
+                .svg-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-left: 16px;
+                    width: 16px;
+                    height: 16px;
+
+                    svg {
+                        fill: #fff;
+                    }
+                }
+                span {
+                    position: absolute;
+                    left: -9000px;
+                    width: 0;
+                    overflow: hidden; 
+                }
+                &:hover, &:focus, &:active {
+                    .popover {
+                        background: $white;
+                        color: $black-light;
+                        @include font-format($font-family, $font-semibold, normal);
+                        padding: 8px;
+                        border-radius: 6px;
+                        display: block;
+                        position: absolute;
+                        top: -48px; 
+                        left: 0.5rem; 
+                        width: 12em;
+                        border: 2px solid $blue-primary;
+                        z-index: 800;
+                    }
+                    .arrow {
+                        background-color: $white; 
+                        border-bottom: 2px solid $blue-primary; 
+                        border-right: 2px solid $blue-primary; 
+                        bottom: -16px; 
+                        height: 16px; 
+                        width: 16px;
+                        position: absolute; 
+                        top: -8px;
+                        left: 6rem;
+                        transform: translate(-50%, -50%) rotate(45deg); 
+                        z-index: 900;
+                    }
+                }
             }
 
             }
         
             &.event-type-in-person {
-                background-color: #EAF6F6;
-                
+                .search-card-content {
+                    background-color: #EAF6F6;
+                }
                 .search-card-header {
                     background-color: $teal-dark;
+                }
+            }
+            &.event-type-recorded {
+                .search-card-content {
+                    background-color: $darkblue-lightest;
+                }
+                .search-card-header {
+                    background-color: $darkblue-mid;
                 }
             }
             
         }
         
-        
-        @media(max-width: 992px) {
-            .search-card-content {
-                
-            }
-        }
         @media(max-width: 767px) {
             .search-card-content .top-row {
                 .search-card-content-type {
