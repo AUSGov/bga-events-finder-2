@@ -4353,11 +4353,25 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .clear-filters svg { position: absolute; top: 4px; right: -24px; }
 
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper { /*&.date-filtered { .search-card-result { display: none; } .date-show { display: block; } .month-show { display: none; } .date-show.month-show { display: block; } }*/ }
+
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .result-task-1 { display: block; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .result-task-2 { display: none !important; }
 
-#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result { border-top: none; padding: 0px; margin-bottom: 32px; box-shadow: none; box-sizing: border-box; display: block; }
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result { border-top: none; padding: 0px; margin-bottom: 32px; box-shadow: none; box-sizing: border-box; display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-show { display: block; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-show.date-hide { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-hide { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show { display: block; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show.event-type-hide { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result .search-card-header { background: #4569A0; padding: 24px 32px; display: flex; justify-content: flex-start; }
 
@@ -4425,13 +4439,15 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result .search-card-content .primary-button:hover .arrow, #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result .search-card-content .primary-button:focus .arrow, #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result .search-card-content .primary-button:active .arrow { background-color: #ffffff; border-bottom: 2px solid #254F90; border-right: 2px solid #254F90; bottom: -16px; height: 16px; width: 16px; position: absolute; top: -8px; left: 6rem; transform: translate(-50%, -50%) rotate(45deg); z-index: 900; }
 
-#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-in-person .search-card-content { background-color: #EAF6F6; }
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.in-person-events .search-card-content { background-color: #EAF6F6; }
 
-#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-in-person .search-card-header { background-color: #218080; }
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.in-person-events .search-card-header { background-color: #218080; }
 
-#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-recorded .search-card-content { background-color: #DFE2EE; }
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.past-recorded-events .search-card-content { background-color: #DFE2EE; }
 
-#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-recorded .search-card-header { background-color: #495C74; }
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.past-recorded-events .search-card-header { background-color: #495C74; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper.unfiltered .search-card-result { display: block; }
 
 @media (max-width: 767px) { #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-content .top-row .search-card-content-type { margin-top: 32px; width: 100%; position: relative; } }
 

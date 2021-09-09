@@ -526,7 +526,30 @@
             margin-bottom: 32px;
             box-shadow: none;
             box-sizing: border-box;
-            display: block;
+            display: none;
+            
+            &.event-type-show {
+                display: block;
+                
+                &.date-hide {
+                    display: none;
+                }
+            }
+            &.event-type-hide {
+                display: none;
+            }
+            &.date-show {
+                display: block;
+                
+                &.event-type-hide {
+                    display: none;
+                }
+            }
+            &.date-hide {
+                display: none;
+            }
+            
+           
             
             .search-card-header {
                 background: $blue-primary-mid;
@@ -768,7 +791,7 @@
 
             }
         
-            &.event-type-in-person {
+            &.in-person-events {
                 .search-card-content {
                     background-color: #EAF6F6;
                 }
@@ -776,7 +799,7 @@
                     background-color: $teal-dark;
                 }
             }
-            &.event-type-recorded {
+            &.past-recorded-events {
                 .search-card-content {
                     background-color: $darkblue-lightest;
                 }
@@ -786,6 +809,25 @@
             }
             
         }
+        &.unfiltered {
+            .search-card-result {
+                display: block;
+            }
+        }
+        /*&.date-filtered {
+            .search-card-result {
+                display: none;
+            }
+            .date-show {
+                display: block;
+            }
+            .month-show {
+                display: none;
+            }
+            .date-show.month-show {
+                display: block;
+            }
+        }*/
         
         @media(max-width: 767px) {
             .search-card-content .top-row {

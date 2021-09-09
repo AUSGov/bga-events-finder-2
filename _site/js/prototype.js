@@ -236,7 +236,84 @@ $(document).ready(function () {
         $(".modal-background").addClass("active");
     });
 
-
+    
+    var event_type_status = "active";
+    var event_types = ['event-type', 'online-events', 'in-person-events', 'past-recorded-events'];
+    var months = [];
+    var all_filters = ['business-planning', 'online-events', 'this-month'];
+    
+    /*var get_filter_status = function(filter_set, active_filters, filter){
+        
+        var show_class = filter_set[0] + "-show";
+        var hide_class = filter_set[0] + "-hide";
+        console.log(filter_option);
+        
+        if(filter_set.includes(filter) && active_filters.includes(filter)) {            
+            
+            $(".search-card-result").each(function(){
+                if ($this).hasClass(filter) {
+                    $(this).addClass(show_class);
+                    $(this).removeClass(hide_class);
+                } 
+                else {
+                    $(this).removeClass(show_class);
+                    $(this).addClass(hide_class);
+                }
+            });               
+        } 
+        else {
+            $(".search-card-result." + filter).each(function(){
+                console.log(show_class);
+                $(this).removeClass(show_class);
+                $(this).addClass(hide_class);
+            });
+        }
+    };*/
+    
+    var add_filter_classes= function(filter_type, filter){
+        
+        var show_class = filter_type + "-show";
+        var hide_class = filter_type + "-hide";
+        var parent = $("label[data-event='" + filter + "']").parents('.checkbox-item');
+        
+        if(parent.hasClass('selected')) { 
+            $(".search-card-result").each(function(){
+                if ($(this).hasClass(filter)) {
+                    $(this).addClass(show_class);
+                    $(this).removeClass(hide_class);
+                } 
+            }); 
+            
+        } else {
+            $(".search-card-result").each(function(){
+                if ($(this).hasClass(filter)) {
+                    $(this).removeClass(show_class); 
+                } 
+            }); 
+            
+        }
+       
+        
+        if($("#" + filter_type + " .checkbox-item.selected").length === 0) {
+            
+            console.log("none are selected");
+            $(".search-card-result").each(function(){
+                $(this).removeClass(hide_class);
+                $(this).removeClass(show_class);
+            });
+        } else {
+            
+            console.log("some are selected"); 
+            $(".search-card-result").each(function(){
+            
+                if (!$(this).hasClass(show_class)) {
+                    $(this).addClass(hide_class);
+                }
+            });
+        }         
+        
+    };
+    
 
     // FILTER ACCORDIONS
     // Open filter accordions
@@ -261,91 +338,62 @@ $(document).ready(function () {
     $('.active-filters.multi-select li').on('click', function(){
         
         var filter_option = $(this).attr('data-value');
-        sessionStorage.setItem(filter_option, false);
+        var filter_type = $(this).parents('.filter-item').attr('ID');
+        
+        //console.log(filter_option);
+        sessionStorage.removeItem(filter_option);
     
         $(this).toggleClass('selected');
-        $('#' + filter_option).parent('.checkbox-item').toggleClass('selected');
+        $(".checkbox-item[data-event='" + filter_option + "']").toggleClass('selected');
+       
+        //total_active_filters();
+        var all_filters = Object.keys(sessionStorage);
+        console.log(all_filters);
         
-        total_active_filters();
-        
-    });
-    
-    
-    // Select filter 'bubble' options-single select
-     $('.active-filters.single-select li').on('click', function(){
-         
-        var filter_type = $(this).parents('.filter-item').attr('id');
-        if ($(this).hasClass('filter-toggle-switch')) {
-            sessionStorage.setItem(filter_type + " selection", 0);
+        if(all_filters.length) {
+            $('.results-wrapper').removeClass('unfiltered');
         } else {
-         
-            $(this).parents('.active-filters').find('li').removeClass('selected');
-            $('.dynamic-question').addClass('disabled');
-            $('input[toggle-filter-type="' + filter_type + '-toggle"]').prop('checked', false).removeClass('selected').attr("disabled", true);
-
-            $('#question-' + filter_type + ' select').val('select-option');     
-            $('#' + filter_type + ' .filter-item-content select').val('select-option');
-
-            sessionStorage.setItem(filter_type + " selection", 'select-option');
-            
-            sessionStorage.setItem(filter_type + "-toggle", 0);
+            $('.results-wrapper').addClass('unfiltered');
         }
-         
+        
+        add_filter_classes(filter_type, filter_option);
+        
     });
-    
-    // Select single select options
-    $('.filter-item-content select').change(function(){
-        
-        var filter_type = $(this).parents('.filter-item').attr('id');
-        var filter_option = $(this).val();
 
-        $('#' + filter_type + ' .active-filters.single-select li').removeClass('selected');
-        $('#' + filter_type + ' .active-filters.single-select li[data-value="' + filter_option + '"]').addClass('selected');   
-        $('#question-' + filter_type + ' select').val(filter_option);
-        
-        // Add to sessionStorage 
-        sessionStorage.setItem(filter_type + " selection", filter_option);
-        
-        // Disable dynamic toggle question
-        if(filter_option !== "select-option") {
-            $('.dynamic-question').removeClass('disabled');
-            
-            $('input[toggle-filter-type="' + toggle_option + '"]').removeAttr("disabled");
-            $('.active-filters li[filter-type="' + toggle_option + '"]').removeClass('selected');
-            
-            $('input[toggle-filter-type="' + toggle_option + '"]').prop('checked', false).removeClass('selected').attr("disabled", false);
-            
-        } else {
-            $('.dynamic-question').addClass('disabled');
-            
-            $('.active-filters li[filter-type="' + toggle_option + '"]').removeClass('selected');
-            
-            $('input[toggle-filter-type="' + toggle_option + '"]').prop('checked', false).removeClass('selected').attr("disabled", true);
-        }
-        
-        if (toggle_option === 'industry-toggle') {
-            sessionStorage.setItem('industry-toggle', 0);
-        }
-   
-    });
     
     // Select filter checkbox options
     $('.checkbox-item label').on('click', function(){
         
-        var filter_option = $(this).parents('.checkbox-item').find('input').attr('id');
+        var filter_option = $(this).attr('data-event');
+        var filter_type = $(this).parents('.filter-item').attr('ID');
         
+        //var filter_status = sessionStorage.getItem(filter_option);
+        //console.log(filter_option);
+        //console.log(filter_type);
+   
         $(this).parents('.checkbox-item').toggleClass('selected');
         $(this).parents('.filter-item').find('.active-filters li[data-value="' + filter_option +'"]').toggleClass('selected ');
                 
         if ($(this).parents('.checkbox-item').hasClass('selected')) {
             sessionStorage.setItem(filter_option, true);
         } else {
-            sessionStorage.setItem(filter_option, false);
+            sessionStorage.removeItem(filter_option);
         }
+        
+        var all_filters = Object.keys(sessionStorage);
+        console.log(all_filters);
+        
+        if(all_filters.length) {
+            $('.results-wrapper').removeClass('unfiltered');
+        } else {
+            $('.results-wrapper').addClass('unfiltered');
+        }
+        
+        add_filter_classes(filter_type, filter_option);
                    
     }); 
     
-    // Select filter text input options
+    // Select filter text input options (postcode field)
     $('.text-field-filter button').on('click', function(){
         var postcode = $(this).parents('.filter-item-content').find('input').val();
         var filter_option = $(this).parents('.filter-item').attr('id');
@@ -363,34 +411,6 @@ $(document).ready(function () {
         
     });
     
-    
-    // Select filter radio button options
-    $('.radio-button label').on('click', function(){
-        $('.radio-button label').each(function(){
-            $(this).removeClass('selected');
-        });
-        $(this).toggleClass('selected');
-    });
-    
-    // Toggle switch questions  
-    $('.filter-item .custom-control-input').on('click', function(){
-        var filter_type = $(this).attr('id');
-        filter_type = filter_type.slice(7, filter_type.length);
-        console.log(filter_type);
-        
-        if ($(this).is(":checked")) { 
-            $(this).toggleClass('selected');
-            $('li[data-value="' + filter_type + '"]').toggleClass('selected');   
-            $('#'+ filter_type + '-switch').prop('checked', true).toggleClass('selected');
-            
-        } else {
-            $(this).toggleClass('selected');
-            $('li[data-value="' + filter_type + '"]').toggleClass('selected');
-            $('#'+ filter_type + '-switch').prop('checked', false).toggleClass('selected');
-        }
-    });
-   
-
 
     // FUNCTION TO COUNT and SET active filter counts
     var all_filter_types = ['date', 'topic', 'business-location', 'online', 'in-person', 'past-recorded-events'];
@@ -478,9 +498,7 @@ $(document).ready(function () {
     // SET ACTIVE FILTERS ON PAGE LOAD - MULTIPLE SELECT
     $('#postcode .active-filters li').text(sessionStorage.getItem('postcode_value'));
     
-    var filter_set_multiple = ['business-finance', 'business-planning', 'contracting-and-tendering', 'customer-service', 'digital-business', 'employing-people', 'exporting', 'government-grant-programs', 'industry-compliance', 'innovation-and-commercialisation', 'marketing', 'networking', 'starting-a-business', 'taxation-and-record-keeping', 'work-health-and-safety', 'online-events', 'in-person-events', 'past-recorded-events', 'past-dates', 'this-month', 'this-month-plus-1', 'this-month-plus-2', 'this-month-plus-3', 'postcode'];
-    
-    
+    var filter_set_multiple = ['in-person-events', 'online-events', 'past-recorded-events', 'business-finance', 'business-planning', 'contracting-and-tendering', 'customer-service', 'digital-business', 'employing-people', 'exporting', 'government-grant-programs', 'industry-compliance', 'innovation-and-commercialisation', 'marketing', 'networking', 'starting-a-business', 'taxation-and-record-keeping', 'work-health-and-safety', 'online-events', 'in-person-events', 'past-recorded-events', 'past-dates', 'this-month', 'this-month-plus-1', 'this-month-plus-2', 'this-month-plus-3', 'postcode'];
     
     for ( var filter = 0; filter < filter_set_multiple.length; filter++) {
         
@@ -493,61 +511,8 @@ $(document).ready(function () {
             }
     }
     
-    // RADIO BUTTONS ['past-dates', 'this-month', 'this-month-plus-1', 'this-month-plus-2', 'this-month-plus-3', 'custom-date-range']
-    
-    
-    
-    
-    // SET ACTIVE FILTERS ON PAGE LOAD - SINGLE SELECT   
-    // function for reset each filter set
-    /*var set_single_filters = function(filter_type, filter_set){
-        
-        var filter_option = sessionStorage.getItem(filter_type + ' selection');
-        if (filter_option === null) {
-            filter_option = 'select-option';
-        }
-        
-        $('select[select-filter-type="' + filter_type + '"]').val(filter_option);     
 
-        $('#' + filter_type + ' select').val(filter_option); 
-
-        $('#' + filter_type + ' .active-filters.single-select li').removeClass('selected');
-        $('#' + filter_type + ' .active-filters.single-select li[data-value="' + filter_option + '"]').addClass('selected');
- 
-     };
-    
-    // Filter sets
-    var filter_set_industry = ['select-option', 'accommodation-and-food-services', 'administrative-and-support-services', 'agriculture-forestry-and-fishing', 'arts-and-recreation-services', 'construction', 'education-and-training', 'electricity-gas-water-and-waste-services', 'financial-and-insurance-services', 'health-care-and-social-assistance', 'information-media-and-telecommunications', 'manufacturing', 'mining', 'professional-scientific-and-technical-services', 'public-administration-and-safety', 'rental-hiring-and-real-estate-services', 'retail-trade', 'transport-postal-and-warehousing', 'wholesale-trade', 'other-services'];
-    
-    var filter_set_business_type = ['select-option','sole-trader', 'partnership', 'company', 'trust', 'not-for-profit'];
    
-    var filter_set_business_stage = ['select-option', '2-years-or-less', '3-and-5-years', 'more-than-5-years'];
-    
-    set_single_filters('industry', filter_set_industry);
-    set_single_filters('business-type', filter_set_business_type);
-    set_single_filters('business-stage', filter_set_business_stage);
-    */
-    
-    
-    // SET TOGGLE SWITCH QUESTIONS ON PAGE LOAD.
-    var filter_set_toggles = ['online', 'in-person', 'past-recorded-events'];
-    
-    for ( var toggle = 0; toggle < filter_set_toggles.length ; toggle++){
-        var toggle_option = filter_set_toggles[toggle];
-        //console.log(toggle_option);
-        
-        if (sessionStorage.getItem(toggle_option) === '1') {  
-            $('input[toggle-filter-type="' + toggle_option + '"]').prop('checked', true).toggleClass('selected');
-            
-            $('.active-filters li[filter-type="' + toggle_option + '"]').toggleClass('selected');
-            var dynamic_question = $('#question-' + toggle_option);
-            $('#question-' + toggle_option).removeClass('disabled');
-        } 
-        
-    }
-    
- 
-    
     // SET FILTER COUNT ON PAGE LOAD
     total_active_filters();
     
@@ -555,7 +520,7 @@ $(document).ready(function () {
     //CREATE 'SHOWING' NUMBER
     var showing = sessionStorage.getItem('showing');
     
-    if (showing === null) {
+    /*if (showing === null) {
         showing = 131;
     }
     if(sessionStorage.getItem('name-filter') !== null) {
@@ -688,44 +653,7 @@ $(document).ready(function () {
         //Set total filter count
         total_active_filters();
     });
-    
-    $('[toggle-filter-type]').change(function(){
-        
-        var filter_type = $(this).attr('toggle-filter-type'),
-            result_count = parseInt(sessionStorage.getItem('showing')),
-            filter_value = parseInt($(this).attr('filter-value')),
-            filter_type_current_value = parseInt(sessionStorage.getItem(filter_type));
-        
-        if (isNaN(filter_type_current_value)){
-            filter_type_current_value = 0;
-        }
-        if (isNaN(result_count)){
-            result_count = parseInt(max_showing);
-        }
-        
-        var reduced_count = Math.round(result_count - filter_value),
-            restore_count = Math.round(result_count + filter_value);
-
-        reduced_count = max_min_count(reduced_count);
-        restore_count = max_min_count(restore_count);  
-
-        if (!$(this).is(":checked")) {
-            $('span.number').text(restore_count);
-            sessionStorage.setItem('showing', restore_count);
-            sessionStorage.setItem(filter_type, 0);
-            
-            $('.filter-item#' + filter_type).find('.mobile-counter').text(0).removeClass('active');
-        } else {
-            $('span.number').text(reduced_count);
-            sessionStorage.setItem('showing', reduced_count);
-            sessionStorage.setItem(filter_type, 1);
-        }
-        
-        //Set total filter count
-        total_active_filters();
-    });
-    
-    
+    */
     
     // VARY SEARCH RESULT CARDS ON DISPLAY
     
@@ -806,7 +734,7 @@ $(document).ready(function () {
     
     
     
-    // SET FILTER MONTHS
+    // SET DYNAMIC MONTHS
     var date = new Date(),
         current_month = date.getMonth(),
         current_month_plus_1 =  date.getMonth() + 1,
@@ -831,7 +759,11 @@ $(document).ready(function () {
     });
 
     
-
+    // MOCK FILTERING BEHAVIOUR
+    // Event-type filtering
+    $("#event-type .checkbox-item label").on('click', function(){
+        
+    });
     
 }); // END doc ready
 
