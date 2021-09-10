@@ -4373,6 +4373,10 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-hide { display: none; }
 
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-show { display: block; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-hide { display: hide; }
+
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result .search-card-header { background: #4569A0; padding: 24px 32px; display: flex; justify-content: flex-start; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result .search-card-header .event-type-icon { margin: 8px 24px 0 0; }

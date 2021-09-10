@@ -292,18 +292,15 @@ $(document).ready(function () {
             }); 
             
         }
-       
         
         if($("#" + filter_type + " .checkbox-item.selected").length === 0) {
             
-            console.log("none are selected");
             $(".search-card-result").each(function(){
                 $(this).removeClass(hide_class);
                 $(this).removeClass(show_class);
             });
         } else {
-            
-            console.log("some are selected"); 
+        
             $(".search-card-result").each(function(){
             
                 if (!$(this).hasClass(show_class)) {
@@ -337,14 +334,14 @@ $(document).ready(function () {
     // Select filter 'bubble' options - multiple select
     $('.active-filters.multi-select li').on('click', function(){
         
-        var filter_option = $(this).attr('data-value');
+        var filter_option = $(this).attr('data-label');
         var filter_type = $(this).parents('.filter-item').attr('ID');
         
         //console.log(filter_option);
         sessionStorage.removeItem(filter_option);
     
         $(this).toggleClass('selected');
-        $(".checkbox-item[data-event='" + filter_option + "']").toggleClass('selected');
+        $(".checkbox-item[data-label='" + filter_option + "']").toggleClass('selected');
        
         //total_active_filters();
         var all_filters = Object.keys(sessionStorage);
