@@ -9925,7 +9925,7 @@ $(document).ready(function() {
                         break;
                     case "MultiSelection":
                         $("#" + t.key).find("button").each(function() {
-                            $(this).attr("data-value") == r && $(this).click()
+                            $(this).attr("data-option") == r && $(this).click()
                         })
                     }
                 }
@@ -9953,7 +9953,7 @@ $(document).ready(function() {
             case "MultiSelection":
                 var r = [];
                 $("#" + i.key).find("button").each(function() {
-                    $(this).hasClass("selected") && r.push($(this).attr("data-value"))
+                    $(this).hasClass("selected") && r.push($(this).attr("data-option"))
                 });
                 $(r).each(function(n, r) {
                     t = t + i.queryParam + "=" + r + "&"
@@ -10246,7 +10246,7 @@ $(function() {
                 u = t[r] - n,
                 $(window).scrollTop() >= u && $(window).scrollTop() <= u + i[r] && ($(".sticky-item ul li a").removeClass("active"),
                 $(".sticky-item ul li a").css("font-weight", "400"),
-                $(".sticky-item ul li a[data-value=" + t[r] + "]").addClass("active"))
+                $(".sticky-item ul li a[data-option=" + t[r] + "]").addClass("active"))
         }
         function o() {
             var r = $(window), f = $(".twoCol39-left").width(), i;
@@ -10269,7 +10269,7 @@ $(function() {
                 u = $(n).height();
                 i.push(Math.round(t));
                 r.push(Math.round(u));
-                $(this).attr("data-value", Math.round(t))
+                $(this).attr("data-option", Math.round(t))
             })
         }
         o();
@@ -10289,10 +10289,10 @@ $(function() {
             $(n).find(".accordion-item-content").each(function() {
                 $(this).attr("aria-hidden") == "true" && (f += $(this).height())
             });
-            $(this).attr("data-value", Math.round(t))
+            $(this).attr("data-option", Math.round(t))
         });
         $(".sticky-item ul li a").on("click", function() {
-            var n = $(this).attr("data-value");
+            var n = $(this).attr("data-option");
             return $([document.documentElement, document.body]).animate({
                 scrollTop: n
             }, 400),

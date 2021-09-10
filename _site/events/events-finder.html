@@ -740,7 +740,7 @@
 
             <form>
                 <div class="checkbox-item">
-                <label data-event="online-events">
+                <label data-option="online-events" data-label="online-events">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="19.636" viewBox="0 0 24 19.636">
                         <path id="Path_7661" data-name="Path 7661" d="M22.818,3H3.182A2.174,2.174,0,0,0,1,5.182V18.273a2.181,2.181,0,0,0,2.182,2.182H8.636v2.182h8.727V20.455h5.455a2.179,2.179,0,0,0,2.171-2.182L25,5.182A2.181,2.181,0,0,0,22.818,3Zm0,15.273H3.182V5.182H22.818Z" transform="translate(-1 -3)" fill="#333" />
                     </svg>
@@ -749,7 +749,7 @@
                 </div>
           
                 <div class="checkbox-item">
-                <label data-event="in-person-events"> 
+                <label data-option="in-person-events" data-label="in-person-events"> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="17.455" viewBox="0 0 24 17.455">
                         <g id="Group_10140" data-name="Group 10140" transform="translate(-1 -4)">
                             <g id="Group_10138" data-name="Group 10138" transform="translate(1 4)">
@@ -765,7 +765,7 @@
                 </div>
           
                 <div class="checkbox-item">
-                <label data-event="past-recorded-events">
+                <label data-option="past-recorded-events" data-label="past-recorded-events">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="19.636" viewBox="0 0 24 19.636">
                         <path id="Path_7662" data-name="Path 7662" d="M9.727,7.364v8.727l7.636-4.364ZM22.818,3H3.182A2.188,2.188,0,0,0,1,5.182V18.273a2.188,2.188,0,0,0,2.182,2.182H8.636v2.182h8.727V20.455h5.455A2.188,2.188,0,0,0,25,18.273V5.182A2.188,2.188,0,0,0,22.818,3Zm0,15.273H3.182V5.182H22.818Z" transform="translate(-1 -3)" fill="#333" />
                     </svg>
@@ -789,11 +789,11 @@
                          </div>
                     <div class="active-filters multi-select">
                         <ul>
-                            <li filter-type="date" data-value="past-months">Past dates (recorded events)</li>
-                            <li filter-type="date" data-value="this-month">This month (<span class="current-month"></span>)</li>
-                            <li filter-type="date" data-value="this-month-plus-1"><span class="current-month-plus-1"></span></li>
-                            <li filter-type="date" data-value="this-month-plus-2"><span class="current-month-plus-2"></span></li>
-                            <li filter-type="date" data-value="this-month-plus-3"><span class="current-month-plus-3"></span> and further</li>
+                            <li filter-type="date" data-option="past-months" data-label="past-months">Past dates (recorded events)</li>
+                            <li filter-type="date" data-option="this-month" data-label="this-month">This month (<span class="current-month"></span>)</li>
+                            <li filter-type="date" data-option="this-month-plus-1" data-label="this-month-plus-1" ><span class="current-month-plus-1"></span></li>
+                            <li filter-type="date" data-option="this-month-plus-2" data-label="this-month-plus-2"><span class="current-month-plus-2"></span></li>
+                            <li filter-type="date" data-option="this-month-plus-3" data-label="this-month-plus-3"><span class="current-month-plus-3"></span> and further</li>
                             
                             
                         </ul>
@@ -801,29 +801,29 @@
                     <div class="filter-item-content">
 
                         <form>
-                            <div class="checkbox-item" data-event="past-months" filter-type="date">
+                            <div class="checkbox-item" data-option="past-months" data-label="past-months" filter-type="date">
                             <input type="checkbox">
-                            <label data-event="past-recorded-events">Past dates (recorded events)</label>
+                            <label data-option="past-months" data-label="past-months">Past dates (recorded events)</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="this-month" filter-type="date">
+                            <div class="checkbox-item" data-option="this-month" data-label="this-month" filter-type="date">
                             <input type="checkbox">
-                            <label data-event="this-month">This month (<span class="current-month"></span>)</label>
+                            <label data-option="this-month" data-label="this-month">This month (<span class="current-month"></span>)</label>
                             </div> 
                             
-                            <div class="checkbox-item" data-event="this-month-plus-1" filter-type="date">
+                            <div class="checkbox-item" data-option="this-month-plus-1" data-label="this-month-plus-1" filter-type="date">
                             <input type="checkbox">
-                            <label data-event="this-month-plus-1" ><span class="current-month-plus-1"></span></label>
+                            <label data-option="this-month-plus-1"  data-label="this-month-plus-1"><span class="current-month-plus-1"></span></label>
                             </div> 
                             
-                            <div class="checkbox-item" data-event="this-month-plus-2" filter-type="date">
+                            <div class="checkbox-item" data-option="this-month-plus-2" data-label="this-month-plus-2" filter-type="date">
                             <input type="checkbox">
-                            <label data-event="this-month-plus-2"><span class="current-month-plus-2"></span></label>
+                            <label data-option="this-month-plus-2" data-label="this-month-plus-2"><span class="current-month-plus-2"></span></label>
                             </div>
                                                         
-                            <div class="checkbox-item" data-event="this-month-plus-3" filter-type="date">
+                            <div class="checkbox-item" data-option="this-month-plus-3" data-label="this-month-plus-3" filter-type="date">
                             <input type="checkbox">
-                            <label data-event="this-month-plus-3"><span class="current-month-plus-3"></span> and further</label>
+                            <label data-option="this-month-plus-3" data-label="this-month-plus-3"><span class="current-month-plus-3"></span> and further</label>
                             </div>  
               
                              
@@ -849,21 +849,21 @@
                          </div>
                     <div class="active-filters multi-select">
                         <ul>
-                            <li filter-type="topic" data-value="topic1" data-label="business-finance">Business finance</li>
-                            <li filter-type="topic" data-value="topic1" data-label="business-planning">Business planning</li>
-                            <li filter-type="topic" data-value="topic1" data-label="contracting-and-tendering">Contracting and tendering</li>
-                            <li filter-type="topic" data-value="topic1" data-label="customer-service">Customer service</li>
-                            <li filter-type="topic" data-value="topic1" data-label="digital-business">Digital business</li>
-                            <li filter-type="topic" data-value="topic1" data-label="employing-people">Employing people</li>
-                            <li filter-type="topic" data-value="topic1" data-label="exporting">Exporting</li>
-                            <li filter-type="topic" data-value="topic1" data-label="government-grant-programs">Government grant programs</li> 
-                            <li filter-type="topic" data-value="topic2" data-label="industry-compliance">Industry compliance</li>
-                            <li filter-type="topic" data-value="topic2" data-label="innovation-and-commercialisation">Innovation and commercialisation</li>
-                            <li filter-type="topic" data-value="topic2" data-label="marketing">Marketing</li>
-                            <li filter-type="topic" data-value="topic2" data-label="networking">Networking</li>
-                            <li filter-type="topic" data-value="topic2" data-label="starting-a-business">Starting a business</li>
-                            <li filter-type="topic" data-value="topic2" data-label="taxation-and-record-keeping">Taxation and record keeping</li>
-                            <li filter-type="topic" data-value="topic2" data-label="work-health-and-safety">Work health and safety</li>
+                            <li filter-type="topic" data-label="topic1" data-option="business-finance">Business finance</li>
+                            <li filter-type="topic" data-label="topic1" data-option="business-planning">Business planning</li>
+                            <li filter-type="topic" data-label="topic1" data-option="contracting-and-tendering">Contracting and tendering</li>
+                            <li filter-type="topic" data-label="topic1" data-option="customer-service">Customer service</li>
+                            <li filter-type="topic" data-label="topic1" data-option="digital-business">Digital business</li>
+                            <li filter-type="topic" data-label="topic1" data-option="employing-people">Employing people</li>
+                            <li filter-type="topic" data-label="topic1" data-option="exporting">Exporting</li>
+                            <li filter-type="topic" data-label="topic1" data-option="government-grant-programs">Government grant programs</li> 
+                            <li filter-type="topic" data-label="topic2" data-option="industry-compliance">Industry compliance</li>
+                            <li filter-type="topic" data-label="topic2" data-option="innovation-and-commercialisation">Innovation and commercialisation</li>
+                            <li filter-type="topic" data-label="topic2" data-option="marketing">Marketing</li>
+                            <li filter-type="topic" data-label="topic2" data-option="networking">Networking</li>
+                            <li filter-type="topic" data-label="topic2" data-option="starting-a-business">Starting a business</li>
+                            <li filter-type="topic" data-label="topic2" data-option="taxation-and-record-keeping">Taxation and record keeping</li>
+                            <li filter-type="topic" data-label="topic2" data-option="work-health-and-safety">Work health and safety</li>
                         </ul>
                     </div>                
                     
@@ -871,79 +871,79 @@
                     <div class="filter-item-content">
 
                         <form>
-                            <div class="checkbox-item" data-event="topic1" data-label="business-finance"filter-type="topic">
+                            <div class="checkbox-item" data-label="topic1" data-option="business-finance" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic1" data-label="business-finance">Business finance</label>
+                            <label data-label="topic1" data-option="business-finance" data-option="business-finance">Business finance</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic1" data-label="business-planning" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic1" data-option="business-planning" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic1" data-label="business-planning">Business planning</label>
+                            <label data-label="topic1" data-option="business-planning" data-option="business-planning">Business planning</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic1" data-label="contracting-and-tendering" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic1" data-option="contracting-and-tendering" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic1" data-label="contracting-and-tendering">Contracting and tendering</label>
+                            <label data-label="topic1" data-label="topic1" data-option="contracting-and-tendering">Contracting and tendering</label>
                             </div> 
                             
-                            <div class="checkbox-item" data-event="topic1" data-label="customer-service" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic1" data-option="customer-service" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic1" data-label="customer-service">Customer service</label>
+                            <label data-label="topic1" data-option="customer-service">Customer service</label>
                             </div>
                                                         
-                            <div class="checkbox-item" data-event="topic1" data-label="digital-business" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic1" data-option="digital-business" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic1" data-label="digital-business">Digital business</label>
+                            <label data-label="topic1" data-option="digital-business">Digital business</label>
                             </div>  
                             
-                            <div class="checkbox-item" data-event="topic1" data-label="employing-people" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic1" data-option="employing-people" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic1" data-label="employing-people">Employing people</label>
+                            <label data-label="topic1" data-option="employing-people">Employing people</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic1" data-label="exporting" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic1" data-option="exporting" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic1" data-label="exporting">Exporting</label>
+                            <label data-label="topic1" data-option="exporting">Exporting</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic1" data-label="government-grant-programs" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic1" data-option="government-grant-programs" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic1" data-label="government-grant-programs">Government grant programs</label>
+                            <label data-label="topic1" data-option="government-grant-programs">Government grant programs</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic2" data-label="industry-compliance" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic2" data-option="industry-compliance" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic2" data-label="industry-compliance">Industry compliance</label>
+                            <label data-label="topic2" data-option="industry-compliance">Industry compliance</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic2" data-label="innovation-and-commercialisation" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic2" data-option="innovation-and-commercialisation" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic2" data-label="innovation-and-commercialisation">Innovation and commercialisation</label>
+                            <label data-label="topic2" data-option="innovation-and-commercialisation">Innovation and commercialisation</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic2" data-label="marketing" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic2" data-option="marketing" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic2" data-label="marketing">Marketing</label>
+                            <label data-label="topic2" data-option="marketing">Marketing</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic2" data-label="networking" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic2" data-option="networking" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic2" data-label="networking">Networking</label>
+                            <label data-label="topic2" data-option="networking">Networking</label>
                             </div>
                             
-                            <div class="checkbox-item" data-event="topic2" data-label="starting-a-business" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic2" data-option="starting-a-business" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic2" data-label="starting-a-business">Starting a business</label>
+                            <label data-label="topic2" data-option="starting-a-business">Starting a business</label>
                             </div> 
                                                     
-                            <div class="checkbox-item" data-event="topic2" data-label="taxation-and-record-keeping" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic2" data-option="taxation-and-record-keeping" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic2" data-label="taxation-and-record-keeping">Taxation and record keeping</label>
+                            <label data-label="topic2" data-option="taxation-and-record-keeping">Taxation and record keeping</label>
                             </div>  
                             
-                            <div class="checkbox-item" data-event="topic2" data-label="work-health-and-safety" filter-type="topic">
+                            <div class="checkbox-item" data-label="topic2" data-option="work-health-and-safety" filter-type="topic">
                             <input type="checkbox">
-                            <label data-event="topic2" data-label="work-health-and-safety">Work health and safety</label>
+                            <label data-label="topic2" data-option="work-health-and-safety">Work health and safety</label>
                             </div>
  
                              
@@ -968,7 +968,7 @@
         
         <div class="active-filters text-select">
             <ul>
-                <li filter-type="postcode" filter-value="13" data-value="postcode"></li>
+                <li filter-type="postcode" data-option="postcode" data-label="postcode"></li>
             </ul>
         </div>                
                     
@@ -1024,7 +1024,7 @@
 <!-- TASK 1 RESULTS -->
 
     
-    <div class="search-card-result in-person-events this-month topic1" id="search-result-1" data-event="in-person">
+    <div class="search-card-result in-person-events this-month topic1" id="search-result-1" data-option="in-person">
         
         <div class="search-card-header">
             <div class="event-type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="34.909" viewBox="0 0 48 34.909">
@@ -1115,7 +1115,7 @@
         
     </div>
     
-    <div class="search-card-result online-events this-month topic2" id="search-result-2" data-event="online">
+    <div class="search-card-result online-events this-month topic2" id="search-result-2" data-option="online">
 
         <div class="search-card-header">
             <div class="event-type-icon">
@@ -1192,7 +1192,7 @@
         
         </div>   
     
-    <div class="search-card-result online-events this-month topic1" id="search-result-3" data-event="online">
+    <div class="search-card-result online-events this-month topic1" id="search-result-3" data-option="online">
 
         <div class="search-card-header">
             <div class="event-type-icon">
@@ -1271,7 +1271,7 @@
         
 </div>
     
-    <div class="search-card-result in-person-events this-month topic2" id="search-result-4" data-event="in-person">
+    <div class="search-card-result in-person-events this-month topic2" id="search-result-4" data-option="in-person">
 
         <div class="search-card-header">
             <div class="event-type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="34.909" viewBox="0 0 48 34.909">
@@ -1359,7 +1359,7 @@
         
         </div>
 
-    <div class="search-card-result in-person-events this-month-plus-1 topic1" id="search-result-5" data-event="in-person">
+    <div class="search-card-result in-person-events this-month-plus-1 topic1" id="search-result-5" data-option="in-person">
 
         <div class="search-card-header">
             <div class="event-type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="34.909" viewBox="0 0 48 34.909">
@@ -1450,7 +1450,7 @@
         
     </div>
 
-    <div class="search-card-result in-person-events this-month-plus-2 topic2" id="search-result-6" data-event="in-person">
+    <div class="search-card-result in-person-events this-month-plus-2 topic2" id="search-result-6" data-option="in-person">
 
         <div class="search-card-header">
             <div class="event-type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="34.909" viewBox="0 0 48 34.909">
@@ -1540,7 +1540,7 @@
         
         </div>
 
-    <div class="search-card-result in-person-events this-month-plus-2 topic1" id="search-result-7" data-event="in-person">
+    <div class="search-card-result in-person-events this-month-plus-2 topic1" id="search-result-7" data-option="in-person">
 
         <div class="search-card-header">
             <div class="event-type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="34.909" viewBox="0 0 48 34.909">
@@ -1624,7 +1624,7 @@
         
         </div>
 
-    <div class="search-card-result in-person-events this-month-plus-2 topic2" id="search-result-8" data-event="in-person">
+    <div class="search-card-result in-person-events this-month-plus-2 topic2" id="search-result-8" data-option="in-person">
 
         <div class="search-card-header">
             <div class="event-type-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="34.909" viewBox="0 0 48 34.909">
@@ -1716,7 +1716,7 @@
         
         </div>
   
-    <div class="search-card-result online-events this-month-plus-3 topic1" id="search-result-9" data-event="online">
+    <div class="search-card-result online-events this-month-plus-3 topic1" id="search-result-9" data-option="online">
 
         <div class="search-card-header">
             <div class="event-type-icon">
@@ -1800,7 +1800,7 @@
         
 </div>
     
-    <div class="search-card-result online-events this-month-plus-3 topic2" id="search-result-10" data-event="online">
+    <div class="search-card-result online-events this-month-plus-3 topic2" id="search-result-10" data-option="online">
 
         <div class="search-card-header">
             <div class="event-type-icon">
@@ -1879,7 +1879,7 @@
         
 </div>
     
-    <div class="search-card-result past-recorded-events past-months topic1" id="search-result-11" data-event="past-recorded">
+    <div class="search-card-result past-recorded-events past-months topic1" id="search-result-11" data-option="past-recorded">
 
         <div class="search-card-header">
             <div class="event-type-icon">

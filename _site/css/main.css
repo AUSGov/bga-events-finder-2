@@ -4365,15 +4365,23 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-show.date-hide { display: none; }
 
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-show.topic-hide { display: none; }
+
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show { display: block; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show.event-type-hide { display: none; }
 
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show.topic-hide { display: none; }
+
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-show { display: block; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-show.date-hide { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-show.event-type-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-hide { display: hide; }
 

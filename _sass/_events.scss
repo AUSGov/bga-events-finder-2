@@ -534,6 +534,9 @@
                 &.date-hide {
                     display: none;
                 }
+                &.topic-hide {
+                    display: none;
+                }
             }
             &.event-type-hide {
                 display: none;
@@ -544,12 +547,23 @@
                 &.event-type-hide {
                     display: none;
                 }
+                &.topic-hide {
+                    display: none;
+                }
             }
             &.date-hide {
                 display: none;
             }
             &.topic-show {
                 display: block;
+                
+                &.date-hide {
+                    display: none;
+                }
+                &.event-type-hide {
+                    display: none;
+                }
+                
             }
             &.topic-hide {
                 display: hide;
