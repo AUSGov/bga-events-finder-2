@@ -15,7 +15,7 @@ $(document).ready(function () {
         }
         return count; 
     };
-    
+
     
     // Main navigation functionality
     $('.navbar-nav .nav-item.dropdown').on('click', function(){
@@ -237,51 +237,64 @@ $(document).ready(function () {
     });
 
     
-    var event_type_status = "active";
-    var event_types = ['event-type', 'online-events', 'in-person-events', 'past-recorded-events'];
-    var months = [];
-    var all_filters = ['business-planning', 'online-events', 'this-month'];
     
-    /*var get_filter_status = function(filter_set, active_filters, filter){
+    // FUNCTION TO COUNT and SET active filter counts
+    var all_filter_types = ['event-type', 'date', 'topic', 'postcode'];
+
+    var total_active_filters = function(){
         
-        var show_class = filter_set[0] + "-show";
-        var hide_class = filter_set[0] + "-hide";
-        console.log(filter_option);
         
-        if(filter_set.includes(filter) && active_filters.includes(filter)) {            
-            
-            $(".search-card-result").each(function(){
-                if ($this).hasClass(filter) {
-                    $(this).addClass(show_class);
-                    $(this).removeClass(hide_class);
-                } 
-                else {
-                    $(this).removeClass(show_class);
-                    $(this).addClass(hide_class);
-                }
-            });               
-        } 
-        else {
-            $(".search-card-result." + filter).each(function(){
-                console.log(show_class);
-                $(this).removeClass(show_class);
-                $(this).addClass(hide_class);
-            });
+        var total_active = sessionStorage.getItem("total_active");
+       
+        if (total_active === null) {
+            total_active = 0;
         }
-    };*/
+        
+        for ( var k = 0; k < all_filter_types.length; k++){ 
+            
+            var filter_type = all_filter_types[k];
+            var filter_count = parseInt(sessionStorage.getItem(filter_type));
+            
+            if(isNaN(filter_count)) {
+                filter_count = 0;  
+            }
+            
+        }
+         
+        sessionStorage.setItem("total_active", total_active);
+        //$('.filter-counter').text(total_active);
+        
+      
+        return total_active;
+    };
+    
+ 
+
+    // SET FILTER COUNT ON PAGE LOAD
+    //total_active_filters();
     
     
-    // Function to 
+    // Function to add classes for hiding and showing filtered results (checkbox items)
     var add_filter_classes= function(filter_type, filter_option, filter_label){
         
         var show_class = filter_type + "-show";
         var hide_class = filter_type + "-hide";
         var parent = $("label[data-option='" + filter_option + "']").parents('.checkbox-item');
-        console.log(show_class);
-        console.log(hide_class);
-        console.log(parent);
+        var grandparent = $("label[data-option='" + filter_option + "']").parents('.filter-item').attr('ID');
+
+        var filter_count = sessionStorage.getItem(grandparent);
+        if(filter_count === null) {
+            filter_count = 0;
+        }
         
         if(parent.hasClass('selected')) { 
+            
+            sessionStorage.setItem(filter_option, "true");
+            
+            filter_count = +filter_count  +1;
+            
+            sessionStorage.setItem(grandparent, filter_count);
+            
             $(".search-card-result").each(function(){
                 if ($(this).hasClass(filter_label)) {
                     $(this).addClass(show_class);
@@ -290,6 +303,12 @@ $(document).ready(function () {
             }); 
             
         } else {
+
+            sessionStorage.removeItem(filter_option);
+            
+            filter_count = +filter_count  -1;
+            sessionStorage.setItem(grandparent, filter_count);
+            
             $(".search-card-result").each(function(){
                 if ($(this).hasClass(filter_label)) {
                     $(this).removeClass(show_class); 
@@ -305,7 +324,7 @@ $(document).ready(function () {
                 $(this).removeClass(show_class);
             });
         } else {
-        
+           
             $(".search-card-result").each(function(){
             
                 if (!$(this).hasClass(show_class)) {
@@ -316,6 +335,7 @@ $(document).ready(function () {
         
     };
     
+     
 
     // FILTER ACCORDIONS
     // Open filter accordions
@@ -339,30 +359,17 @@ $(document).ready(function () {
     // Select filter 'bubble' options - multiple select
     $('.active-filters.multi-select li').on('click', function(){
         
+        //total_active_filters();
+        
         var filter_option = $(this).attr('data-option');
         var filter_label = $(this).attr('data-label');
         var filter_type = $(this).parents('.filter-item').attr('ID');
 
-        
-        console.log(filter_option + " (option)");
-        console.log(filter_label + " (label)");
-        
         sessionStorage.removeItem(filter_option);
-        
         
         $(this).toggleClass('selected');
         $(".checkbox-item[data-option='" + filter_option + "']").toggleClass('selected');
-       
-        
-        var all_filters = Object.keys(sessionStorage);
-        console.log(all_filters);
-        
-        if(all_filters.length) {
-            $('.results-wrapper').removeClass('unfiltered');
-        } else {
-            $('.results-wrapper').addClass('unfiltered');
-        }
-        
+
         add_filter_classes(filter_type, filter_option, filter_label);
         
     });
@@ -370,63 +377,94 @@ $(document).ready(function () {
     
     // Select filter checkbox options
     $('.checkbox-item label').on('click', function(){
+                
+        //total_active_filters();
         
         var filter_option = $(this).attr('data-option');
         var filter_label = $(this).attr('data-label');
         var filter_type = $(this).parents('.filter-item').attr('ID');
-   
+        
         $(this).parents('.checkbox-item').toggleClass('selected');
         $(this).parents('.filter-item').find('.active-filters li[data-option="' + filter_option +'"]').toggleClass('selected ');
-                
-        if ($(this).parents('.checkbox-item').hasClass('selected')) {
-            sessionStorage.setItem(filter_option, true);
-            
-            //var filter_count = sessionStorage.getItem('filter_count');
-            //console.log(filter_count);
-            //var updated_count = filter_count + 1;
-            //sessionStorage.setItem(filter_count, updated_count);
-        } 
-        else {
-            sessionStorage.removeItem(filter_option);
-            //var updated_count = filter_count - 1;
-            //sessionStorage.setItem(filter_count, updated_count);
-        }
-        
-        var all_filters = Object.keys(sessionStorage);
-        console.log(all_filters);
-        
-        if(all_filters.length) {
-            $('.results-wrapper').removeClass('unfiltered');
-        } else {
-            $('.results-wrapper').addClass('unfiltered');
-        }
-        
+  
         add_filter_classes(filter_type, filter_option, filter_label);
+        
+        
                    
     }); 
     
+    
+    // Function to add classes for hiding and showing filtered results (button items)
+    var add_filter_classes_2= function(filter_type, filter_option, filter_label){
+            
+        var show_class = filter_type + "-show";
+        var hide_class = filter_type + "-hide";
+        var parent = $("label[data-option='" + filter_option + "']").parents('.text-field-item');
+        var grandparent = $("label[data-option='" + filter_option + "']").parents('.filter-item').attr('ID');
+
+        
+        if($("#" + filter_type + " .text-field-tem.selected").length === 0) {
+            
+            console.log($("#" + filter_type + " .text-field-item"));
+            $(".search-card-result").each(function(){
+                $(this).removeClass(hide_class);
+                $(this).removeClass(show_class);
+            });
+        } else {
+           
+            $(".search-card-result").each(function(){
+                console.log($("#" + filter_type + " .text-field-item"));
+                if (!$(this).hasClass(show_class)) {
+                    $(this).addClass(hide_class);
+                }
+            });
+        }         
+        
+    };
+   
+   
+    
+    
     // Select filter text input options (postcode field)
     $('.text-field-filter button').on('click', function(){
-        var postcode = $(this).parents('.filter-item-content').find('input').val();
-        var filter_option = $(this).parents('.filter-item').attr('id');
-        //console.log(postcode);
         
-        $(this).parents('.text-field-filter').find('.active-filters li').text(postcode).addClass('selected');
+        //total_active_filters();
+        
+        var filter_option = $(this).parents(".filter-item-content").find("label").attr('data-option');
+        var filter_label = $(this).parents(".filter-item-content").find("label").attr('data-label');
+        var filter_type = $(this).parents('.filter-item').attr('ID');
+        var postcode_val = $(this).parents('.filter-item-content').find('input').val();
+        
+        
+        
+        $(this).parents('.text-field-filter').find('.active-filters li').text(postcode_val).addClass('selected');
+        $(this).parents('.text-field-item').addClass('selected');
+        
         sessionStorage.setItem(filter_option, true);
-        //sessionStorage.setItem(filter_option + "_value", postcode);
+        sessionStorage.setItem(filter_type + "_value", postcode_val);
+        sessionStorage.setItem(filter_type, 1);
+        
+        add_filter_classes_2(filter_type, filter_option, filter_label);
+        
     });
+    
     $(".text-select li").on('click', function(){
-        var filter_option = $(this).parents('.filter-item').attr('id');
-        //console.log(filter_option);
+        
+        //total_active_filters();
+        
+        var filter_type = $(this).parents('.filter-item').attr('id');
+        var filter_option = $(this).attr('data-option');
+        
         
         sessionStorage.removeItem(filter_option);
+        sessionStorage.setItem(filter_type, 0);
+        
         $(this).removeClass('selected');
+        $(this).parents('.filter-item').find('.text-field-item').removeClass('selected');
         
     });
     
 
-    // FUNCTION TO COUNT and SET active filter counts
-    var all_filter_types = ['date', 'topic', 'business-location', 'online', 'in-person', 'past-recorded-events'];
     
     
     // MOBILE FILTER VISIBILITY
@@ -457,10 +495,7 @@ $(document).ready(function () {
         $('.modal-background').removeClass('active');
     });
     
-    // RESULTS CARDS
-
-    
-    
+ 
     
     // CLEAR ALL FILTERS / QUESTIONS
     var clear_filters = function(){
@@ -488,185 +523,44 @@ $(document).ready(function () {
     
     
     
-    // FUNCTION COUNT TOTAL NUMBER OF ACTIVE FILTERS
-    var total_active_filters = function(){
-       
-        var total_active = 0;
-
-        for ( var k = 0; k < all_filter_types.length; k++){ 
-            
-            var filter_type = all_filter_types[k];
-            var filter_count = parseInt(sessionStorage.getItem(filter_type));
-            
-            if(isNaN(filter_count)) {
-                filter_count = 0;
-            }
-            total_active = total_active + filter_count;
-        }
-        
-        $('.filter-counter').text(total_active);
-    };
-
+    
         
     // SET ACTIVE FILTERS ON PAGE LOAD - MULTIPLE SELECT
     $('#postcode .active-filters li').text(sessionStorage.getItem('postcode_value'));
     
-    var filter_set_multiple = ['in-person-events', 'online-events', 'past-recorded-events', 'business-finance', 'business-planning', 'contracting-and-tendering', 'customer-service', 'digital-business', 'employing-people', 'exporting', 'government-grant-programs', 'industry-compliance', 'innovation-and-commercialisation', 'marketing', 'networking', 'starting-a-business', 'taxation-and-record-keeping', 'work-health-and-safety', 'online-events', 'in-person-events', 'past-recorded-events', 'past-dates', 'this-month', 'this-month-plus-1', 'this-month-plus-2', 'this-month-plus-3', 'postcode'];
+    var filter_set_multiple = ['in-person-events', 'online-events', 'past-recorded-events', 'business-finance', 'business-planning', 'contracting-and-tendering', 'customer-service', 'digital-business', 'employing-people', 'exporting', 'government-grant-programs', 'industry-compliance', 'innovation-and-commercialisation', 'marketing', 'networking', 'starting-a-business', 'taxation-and-record-keeping', 'work-health-and-safety', 'past-mmonths', 'this-month', 'this-month-plus-1', 'this-month-plus-2', 'this-month-plus-3', 'postcode_status'];
     
     for ( var filter = 0; filter < filter_set_multiple.length; filter++) {
         
         var filter_option = filter_set_multiple[filter];
             
             if (sessionStorage.getItem(filter_option) === "true") {  
-                // Select filters on the page       
+            
+                // Select filters on the page  
                 $('.active-filters li[data-option="' + filter_option + '"]').toggleClass('selected');    
-                $('#' + filter_option).parent('.checkbox-item').toggleClass('selected');
+                $('label[data-option="' + filter_option + '"]').parent('.checkbox-item').toggleClass('selected');
+                
             }
     }
     
 
    
-    // SET FILTER COUNT ON PAGE LOAD
-    total_active_filters();
     
 
     //CREATE 'SHOWING' NUMBER
     var showing = sessionStorage.getItem('showing');
     
-    /*if (showing === null) {
+    if (showing === null) {
         showing = 131;
     }
-    if(sessionStorage.getItem('name-filter') !== null) {
+    /*if(sessionStorage.getItem('name-filter') !== null) {
+        console.log(sessionStorage.getItem('name-filter'));
         sessionStorage.removeItem('name-filter');
         showing = 131;
-    }
+    }*/
     $('span.number').text(showing);
     
-    $('[filter-type]').on('click', function(){
-
-        var filter_type = $(this).attr('filter-type'),
-            select_filter_type = $(this).attr('select-filter-type'),
-            result_count = parseInt(sessionStorage.getItem('showing')),
-            filter_value = parseInt($(this).attr('filter-value')),
-            filter_type_current_value = parseInt(sessionStorage.getItem(filter_type));
-        
-        if (isNaN(filter_type_current_value)){
-            filter_type_current_value = 0;
-        }
-        if (isNaN(result_count)){
-            result_count = parseInt(max_showing);
-        }
-        
-        var reduced_count = Math.round(result_count - 70),
-            restore_count = Math.round(result_count + 70),
-            new_count_minus = result_count - filter_value,
-            new_count_plus = result_count + filter_value;
-        
-        reduced_count = max_min_count(reduced_count);
-        restore_count = max_min_count(restore_count);
-        new_count_minus = max_min_count(new_count_minus);
-        new_count_plus = max_min_count(new_count_plus); 
-        
-        // First use of a filter type
-        if (filter_type_current_value === 0) {
-
-            if ($(this).hasClass('selected')) {
-                $('span.number').text(reduced_count);
-                sessionStorage.setItem('showing', reduced_count);
-                sessionStorage.setItem(filter_type, filter_type_current_value + 1);
-                $('.filter-item#' + filter_type).find('.mobile-counter').text(filter_type_current_value + 1).addClass('active');
-                
-                total_active_filters();
-                return false;
-                
-            } else {
-                // This is not a possible scenario  
-            }
-            
-        
-            
-        // Catch the last use of a filter type and reset
-        } else if (filter_type_current_value === 1) {  
-            if ($(this).hasClass('selected')) {
-                $('span.number').text(new_count_plus);
-                sessionStorage.setItem('showing', new_count_plus);
-                sessionStorage.setItem(filter_type, filter_type_current_value + 1);
-                $('.filter-item#' + filter_type).find('.mobile-counter').text(filter_type_current_value + 1).addClass('active');
-                
-                total_active_filters();
-                return false;
-                
-                
-            } else {
-                $('span.number').text(restore_count);
-                sessionStorage.setItem('showing', restore_count);
-                sessionStorage.setItem(filter_type, filter_type_current_value - 1);
-                $('.filter-item#' + filter_type).find('.mobile-counter').text(filter_type_current_value - 1).removeClass('active');
-                
-                total_active_filters();
-                return false;
-            }
-            
-            
-            
-        }
-        
-        // All other clicks on a filter type
-        else {
-            if ($(this).hasClass('selected')) {
-                $('span.number').text(new_count_plus);
-                sessionStorage.setItem('showing', new_count_plus);
-                sessionStorage.setItem(filter_type, filter_type_current_value + 1);
-                $('.filter-item#' + filter_type).find('.mobile-counter').text(filter_type_current_value + 1).addClass('active');
-                
-                total_active_filters();
-                return false;
-                
-            } else {  
-                $('span.number').text(new_count_minus);
-                sessionStorage.setItem('showing', new_count_minus);
-                sessionStorage.setItem(filter_type, filter_type_current_value - 1);
-                $('.filter-item#' + filter_type).find('.mobile-counter').text(filter_type_current_value - 1).addClass('active');
-                
-                total_active_filters();
-                return false;
-                
-            }
-        }
-
-
-    });
     
-    $('[select-filter-type]').change(function(){
-        
-        var filter_type = $(this).attr('select-filter-type'),
-            result_count = parseInt(sessionStorage.getItem('showing')),
-            filter_value = parseInt($(this).attr('filter-value')),
-            filter_type_current_value = parseInt(sessionStorage.getItem(filter_type));
-        
-        if (isNaN(filter_type_current_value)){
-            filter_type_current_value = 0;
-        }
-        if (isNaN(result_count)){
-            result_count = parseInt(max_showing);
-        }
-        
-        var reduced_count = Math.round(result_count - 93),
-            new_count_plus = result_count + filter_value;
-
-        reduced_count = max_min_count(reduced_count);
-        new_count_plus = max_min_count(new_count_plus);  
- 
-        $('span.number').text(reduced_count);
-        sessionStorage.setItem('showing', reduced_count);
-        sessionStorage.setItem(filter_type, 1);
-        
-        $('.filter-item#' + filter_type).find('.mobile-counter').text(1).addClass('active');
-
-        //Set total filter count
-        total_active_filters();
-    });
-    */
     
     // VARY SEARCH RESULT CARDS ON DISPLAY
     
@@ -766,7 +660,7 @@ $(document).ready(function () {
     
     // READ MORE ACCORDIONS
     $('.accordion.event-information .accordion-item button').on('click', function(){
-        console.log($(this));
+        //console.log($(this));
         $(this).parents('.accordion-item').toggleClass('open');
         $(this).parents('.accordion-item').find('.accordion-body').slideToggle();
     });

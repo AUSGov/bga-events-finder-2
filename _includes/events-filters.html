@@ -2,21 +2,12 @@
     <!--<h3>Filter events</h3>-->         
     
     
-   <!-- EVENT TYPE TOGGLES -->
+    <!-- 1. EVENT TYPE  -->
     <div class="filter-item" id="event-type">
 
             <form>
-                <div class="checkbox-item">
-                <label data-option="online-events" data-label="online-events">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="19.636" viewBox="0 0 24 19.636">
-                        <path id="Path_7661" data-name="Path 7661" d="M22.818,3H3.182A2.174,2.174,0,0,0,1,5.182V18.273a2.181,2.181,0,0,0,2.182,2.182H8.636v2.182h8.727V20.455h5.455a2.179,2.179,0,0,0,2.171-2.182L25,5.182A2.181,2.181,0,0,0,22.818,3Zm0,15.273H3.182V5.182H22.818Z" transform="translate(-1 -3)" fill="#333" />
-                    </svg>
-                    Online events</label>
-                    <input type="checkbox" id="online-events">
-                </div>
-          
-                <div class="checkbox-item">
-                <label data-option="in-person-events" data-label="in-person-events"> 
+                <div class="checkbox-item" filter-type="event-type">
+                <label data-option="in-person-events" data-label="in-person-events" filter-type="event-type" > 
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="17.455" viewBox="0 0 24 17.455">
                         <g id="Group_10140" data-name="Group 10140" transform="translate(-1 -4)">
                             <g id="Group_10138" data-name="Group 10138" transform="translate(1 4)">
@@ -30,21 +21,34 @@
                     In person events</label>
                     <input type="checkbox" id="in-person-events">
                 </div>
+                
+                
+                <div class="checkbox-item" filter-type="event-type">
+                <label data-option="online-events" data-label="online-events" filter-type="event-type">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="19.636" viewBox="0 0 24 19.636">
+                        <path id="Path_7661" data-name="Path 7661" d="M22.818,3H3.182A2.174,2.174,0,0,0,1,5.182V18.273a2.181,2.181,0,0,0,2.182,2.182H8.636v2.182h8.727V20.455h5.455a2.179,2.179,0,0,0,2.171-2.182L25,5.182A2.181,2.181,0,0,0,22.818,3Zm0,15.273H3.182V5.182H22.818Z" transform="translate(-1 -3)" fill="#333" />
+                    </svg>
+                    Online events</label>
+                    <input type="checkbox" id="online-events">
+                </div>
           
-                <div class="checkbox-item">
-                <label data-option="past-recorded-events" data-label="past-recorded-events">
+                
+          
+                <div class="checkbox-item" filter-type="event-type">
+                <label data-option="past-recorded-events" data-label="past-recorded-events"  filter-type="event-type">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="19.636" viewBox="0 0 24 19.636">
                         <path id="Path_7662" data-name="Path 7662" d="M9.727,7.364v8.727l7.636-4.364ZM22.818,3H3.182A2.188,2.188,0,0,0,1,5.182V18.273a2.188,2.188,0,0,0,2.182,2.182H8.636v2.182h8.727V20.455h5.455A2.188,2.188,0,0,0,25,18.273V5.182A2.188,2.188,0,0,0,22.818,3Zm0,15.273H3.182V5.182H22.818Z" transform="translate(-1 -3)" fill="#333" />
                     </svg>
-                    past recorded events</label>
+                    On demand events</label>
                     <input type="checkbox" id="past-recorded-events">
                 </div>
            </form>
       
     </div>
 
-    
-     <div class="filter-item" id="date">
+   
+    <!-- 2. DATE -->
+    <div class="filter-item" id="date">
                     <div class="filter-item-title">
                          <p>Date <span class="mobile-counter"></span></p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12.5" viewBox="0 0 20 12.5">
@@ -56,11 +60,12 @@
                          </div>
                     <div class="active-filters multi-select">
                         <ul>
-                            <li filter-type="date" data-option="past-months" data-label="past-months">Past dates (recorded events)</li>
-                            <li filter-type="date" data-option="this-month" data-label="this-month">This month (<span class="current-month"></span>)</li>
-                            <li filter-type="date" data-option="this-month-plus-1" data-label="this-month-plus-1" ><span class="current-month-plus-1"></span></li>
-                            <li filter-type="date" data-option="this-month-plus-2" data-label="this-month-plus-2"><span class="current-month-plus-2"></span></li>
-                            <li filter-type="date" data-option="this-month-plus-3" data-label="this-month-plus-3"><span class="current-month-plus-3"></span> and further</li>
+                            
+                            <li filter-type="date" data-option="this-month" data-label="this-month"> <span class="current-month"></span> (this month)</li>
+                            <li filter-type="date" data-option="this-month-plus-1" data-label="this-month-plus-1" ><span class="current-month-plus-1"></span> (next month)</li>
+                            <li filter-type="date" data-option="this-month-plus-2" data-label="this-month-plus-2"><span class="current-month-plus-2"> </span> and further dates</li>
+                            
+                            <li filter-type="date" data-option="past-months" data-label="past-months">On demand events</li>
                             
                             
                         </ul>
@@ -68,31 +73,27 @@
                     <div class="filter-item-content">
 
                         <form>
-                            <div class="checkbox-item" data-option="past-months" data-label="past-months" filter-type="date">
-                            <input type="checkbox">
-                            <label data-option="past-months" data-label="past-months">Past dates (recorded events)</label>
-                            </div>
+                            
                             
                             <div class="checkbox-item" data-option="this-month" data-label="this-month" filter-type="date">
                             <input type="checkbox">
-                            <label data-option="this-month" data-label="this-month">This month (<span class="current-month"></span>)</label>
+                            <label data-option="this-month" data-label="this-month"><span class="current-month"></span> (this month)</label>
                             </div> 
                             
                             <div class="checkbox-item" data-option="this-month-plus-1" data-label="this-month-plus-1" filter-type="date">
                             <input type="checkbox">
-                            <label data-option="this-month-plus-1"  data-label="this-month-plus-1"><span class="current-month-plus-1"></span></label>
+                            <label data-option="this-month-plus-1"  data-label="this-month-plus-1"><span class="current-month-plus-1"></span> (next month)</label>
                             </div> 
                             
                             <div class="checkbox-item" data-option="this-month-plus-2" data-label="this-month-plus-2" filter-type="date">
                             <input type="checkbox">
-                            <label data-option="this-month-plus-2" data-label="this-month-plus-2"><span class="current-month-plus-2"></span></label>
+                            <label data-option="this-month-plus-2" data-label="this-month-plus-2"><span class="current-month-plus-2"> </span>  and further dates</label>
                             </div>
-                                                        
-                            <div class="checkbox-item" data-option="this-month-plus-3" data-label="this-month-plus-3" filter-type="date">
+                            
+                            <div class="checkbox-item" data-option="past-months" data-label="past-months" filter-type="date">
                             <input type="checkbox">
-                            <label data-option="this-month-plus-3" data-label="this-month-plus-3"><span class="current-month-plus-3"></span> and further</label>
-                            </div>  
-              
+                            <label data-option="past-months" data-label="past-months">No date (on demand)</label>
+                            </div>
                              
                         </form>
                         
@@ -235,17 +236,17 @@
         
         <div class="active-filters text-select">
             <ul>
-                <li filter-type="postcode" data-option="postcode" data-label="postcode"></li>
+                <li filter-type="postcode" data-option="postcode_status" data-label="postcode_status"></li>
             </ul>
         </div>                
                     
 
         <div class="filter-item-content">
 
-            <label>Enter your business postcode</label>
+            <label data-option="postcode_status" data-label="postcode_status">Enter your business postcode</label>
             <div class="text-field-item">
                 <input type="text" />
-                <button class="apply-postcode">Add postcode </button>
+                <button class="apply-postcode"  filter-type="postcode">Add postcode </button>
             </div>
 
 

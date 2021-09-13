@@ -526,7 +526,7 @@
             margin-bottom: 32px;
             box-shadow: none;
             box-sizing: border-box;
-            display: none;
+            display: block;
             
             &.event-type-show {
                 display: block;
@@ -829,11 +829,11 @@
             }
             
         }
-        &.unfiltered {
+        /*&.unfiltered {
             .search-card-result {
                 display: block;
             }
-        }
+        }*/
         /*&.date-filtered {
             .search-card-result {
                 display: none;
