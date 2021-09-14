@@ -4365,6 +4365,8 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-show.topic-hide { display: none; }
 
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-show.postcode-hide { display: none; }
+
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show { display: block; }
@@ -4372,6 +4374,8 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show.event-type-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show.topic-hide { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-show.postcode-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.date-hide { display: none; }
 
@@ -4381,7 +4385,19 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-show.event-type-hide { display: none; }
 
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-show.postcode-hide { display: none; }
+
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-hide { display: hide; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.postcode-show { display: block; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.postcode-show.date-hide { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.postcode-show.event-type-hide { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.postcode-show.topic-hide { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.postcode-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result .search-card-header { background: #4569A0; padding: 24px 32px; display: flex; justify-content: flex-start; }
 

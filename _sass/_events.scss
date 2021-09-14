@@ -522,6 +522,9 @@
                 &.topic-hide {
                     display: none;
                 }
+                &.postcode-hide {
+                    display: none;
+                }
             }
             &.event-type-hide {
                 display: none;
@@ -533,6 +536,9 @@
                     display: none;
                 }
                 &.topic-hide {
+                    display: none;
+                }
+                &.postcode-hide {
                     display: none;
                 }
             }
@@ -548,10 +554,29 @@
                 &.event-type-hide {
                     display: none;
                 }
+                &.postcode-hide {
+                    display: none;
+                }
                 
             }
             &.topic-hide {
                 display: hide;
+            }
+            &.postcode-show {
+                display: block;
+                
+                &.date-hide {
+                    display: none;
+                }
+                &.event-type-hide {
+                    display: none;
+                }
+                &.topic-hide {
+                    display: none;
+                }
+            }
+            &.postcode-hide {
+                display: none;
             }
             
            

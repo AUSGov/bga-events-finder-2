@@ -476,9 +476,8 @@ $(document).ready(function () {
                 $(this).addClass('hidden');
             } 
         });
-        console.log(count);
         
-        if(count < 11) {
+        if(count < 10) {
             $('.pagination-wrapper').css('display', 'none');
             $('.page-number-wrapper').css('display', 'none');
             
@@ -536,8 +535,11 @@ $(document).ready(function () {
         $('.filter-item-content').slideUp();
         $('.filter-item .custom-control-input').prop('checked', false).removeClass('selected');
         
-        sessionStorage.setItem('showing', max_showing);
-        $('span.number').text(sessionStorage.getItem('showing'));
+        $('.search-card-result').each(function(){
+            $(this).removeClass("event-type-hide event-type-show date-hide date-show topic-hide topic-show postcode-hide postcode-show");
+        });
+        
+        count_results();
         
         sessionStorage.clear();
         
@@ -558,18 +560,29 @@ $(document).ready(function () {
     
     var filter_set_multiple = ['in-person-events', 'online-events', 'past-recorded-events', 'business-finance', 'business-planning', 'contracting-and-tendering', 'customer-service', 'digital-business', 'employing-people', 'exporting', 'government-grant-programs', 'industry-compliance', 'innovation-and-commercialisation', 'marketing', 'networking', 'starting-a-business', 'taxation-and-record-keeping', 'work-health-and-safety', 'past-mmonths', 'this-month', 'this-month-plus-1', 'this-month-plus-2', 'this-month-plus-3', 'postcode_status'];
     
-    var add_classes_on_load = function(item){
+    var filter_types = ['event-type', 'date', 'topic', 'postcode'];
+    
+    var add_show_classes_on_load = function(item){
+        
         $(item).each(function(){
-            if ( $(this).hasClass(filter_option) ) {
+            if ( $(this).hasClass(filter_label) ) {
                 $(this).addClass(show_class);
-                $(this).removeClass(hide_class);
-            } 
-            else {
+            }   
+        });   
+    };
+    
+    var add_hide_classes_on_load = function(item, filter_type){
+        
+        var show_class = filter_type + "-show";
+        var hide_class = filter_type + "-hide";
+        
+        $(item).each(function(){
+            if (!$(this).hasClass(show_class)) {
                 $(this).addClass(hide_class);
-                $(this).removeClass(show_class);
             }
         });
     };
+    
     for ( var filter = 0; filter < filter_set_multiple.length; filter++) {
         
         var filter_option = filter_set_multiple[filter];    
@@ -577,25 +590,37 @@ $(document).ready(function () {
             if (sessionStorage.getItem(filter_option) === "true") {  
             
                 // Select filters on the page  
-                console.log(filter_option);
-                var filter_type =$('.active-filters li[data-option="' + filter_option + '"]').attr('filter-type');
+                
+                var filter_type = $('.active-filters li[data-option="' + filter_option + '"]').attr('filter-type');
+                var filter_label = $('.active-filters li[data-option="' + filter_option + '"]').attr('data-label');
+                
+                
                 if (!filter_type) {
                     filter_type =  $('label[data-option="' + filter_option + '"]').attr('filter-type');
+                }
+                if (!filter_label) {
+                    filter_label =  $('label[data-option="' + filter_option + '"]').attr('data-label');
                 }
                 
                 var show_class = filter_type + "-show";
                 var hide_class = filter_type + "-hide";
-                console.log(show_class);
-                console.log(hide_class);
             
                 $('.active-filters li[data-option="' + filter_option + '"]').toggleClass('selected');    
                 $('label[data-option="' + filter_option + '"]').parent('.checkbox-item').toggleClass('selected');
                 
-                add_classes_on_load('.search-card-result');
+                add_show_classes_on_load('.search-card-result');
             }
         
-        count_results();
     }
+    for ( var i = 0; i < filter_types.length; i++) {
+        
+        var f_type = filter_types[i];
+        
+        if (sessionStorage.getItem(f_type) > 0) {
+            add_hide_classes_on_load('.search-card-result', f_type);
+        }
+    }
+    count_results();
 
     
     

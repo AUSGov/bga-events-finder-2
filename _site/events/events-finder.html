@@ -797,16 +797,13 @@
                             <li filter-type="date" data-option="this-month" data-label="this-month"> <span class="current-month"></span> (this month)</li>
                             <li filter-type="date" data-option="this-month-plus-1" data-label="this-month-plus-1" ><span class="current-month-plus-1"></span> (next month)</li>
                             <li filter-type="date" data-option="this-month-plus-2" data-label="this-month-plus-2"><span class="current-month-plus-2"> </span> and further dates</li>
-                            
-                            <li filter-type="date" data-option="past-months" data-label="past-months">On demand events</li>
-                            
+                 
                             
                         </ul>
                     </div>                
                     <div class="filter-item-content">
 
                         <form>
-                            
                             
                             <div class="checkbox-item" data-option="this-month" data-label="this-month" filter-type="date">
                             <input type="checkbox">
@@ -821,12 +818,8 @@
                             <div class="checkbox-item" data-option="this-month-plus-2" data-label="this-month-plus-2" filter-type="date">
                             <input type="checkbox">
                             <label data-option="this-month-plus-2" data-label="this-month-plus-2"><span class="current-month-plus-2"> </span>  and further dates</label>
-                            </div>
+                            </div>   
                             
-                            <div class="checkbox-item" data-option="past-months" data-label="past-months" filter-type="date">
-                            <input type="checkbox">
-                            <label data-option="past-months" data-label="past-months">No date (on demand)</label>
-                            </div>
                              
                         </form>
                         
@@ -969,14 +962,14 @@
         
         <div class="active-filters text-select">
             <ul>
-                <li filter-type="postcode" data-option="postcode_status" data-label="postcode_status"></li>
+                <li filter-type="postcode" data-option="postcode_status" data-label="postcode"></li>
             </ul>
         </div>                
                     
 
         <div class="filter-item-content">
 
-            <label data-option="postcode_status" data-label="postcode_status">Enter your business postcode</label>
+            <label data-option="postcode_status" data-label="postcode">Enter your business postcode</label>
             <div class="text-field-item">
                 <input type="text" />
                 <button class="apply-postcode"  filter-type="postcode">Add postcode </button>
@@ -2946,7 +2939,7 @@
     
     <!-- Past recorded -->
     
-    <div class="search-card-result past-recorded-events past-months topic1" id="search-result-11" data-option="past-recorded">
+    <div class="search-card-result past-recorded-events this-month this-month-plus-1 this-month-plus-2 topic1" id="search-result-11" data-option="past-recorded">
 
         <div class="search-card-header">
             <div class="event-type-icon">
@@ -3031,7 +3024,7 @@
         
         </div>
     
-    <div class="search-card-result past-recorded-events past-months topic1" id="search-result-12" data-option="past-recorded">
+    <div class="search-card-result past-recorded-events this-month this-month-plus-1 this-month-plus-2 topic1" id="search-result-12" data-option="past-recorded">
 
         <div class="search-card-header">
             <div class="event-type-icon">
