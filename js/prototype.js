@@ -562,9 +562,11 @@ $(document).ready(function () {
         $(item).each(function(){
             if ( $(this).hasClass(filter_option) ) {
                 $(this).addClass(show_class);
+                $(this).removeClass(hide_class);
             } 
             else {
                 $(this).addClass(hide_class);
+                $(this).removeClass(show_class);
             }
         });
     };
