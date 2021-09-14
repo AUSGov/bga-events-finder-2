@@ -5,7 +5,7 @@
 $(document).ready(function () {
     
     // Max amount for grants 'showing. and function to keep number between 0 and max_showing.
-    var max_showing = 131;
+    var max_showing = 87;
     var max_min_count = function(number){
         var count = number;
         if (count > 131) {
@@ -240,8 +240,7 @@ $(document).ready(function () {
     
     // FUNCTION TO COUNT and SET active filter counts
     var all_filter_types = ['event-type', 'date', 'topic', 'postcode'];
-
-    var total_active_filters = function(){
+    /*var total_active_filters = function(){
         
         
         var total_active = sessionStorage.getItem("total_active");
@@ -266,7 +265,7 @@ $(document).ready(function () {
         
       
         return total_active;
-    };
+    };*/
     
  
 
@@ -274,7 +273,7 @@ $(document).ready(function () {
     //total_active_filters();
     
     
-    // Function to add classes for hiding and showing filtered results (checkbox items)
+    // FUNCTION TO ADD CLASSES FOR FILTERING RESULTS (checkbox items)
     var add_filter_classes= function(filter_type, filter_option, filter_label){
         
         var show_class = filter_type + "-show";
@@ -371,6 +370,7 @@ $(document).ready(function () {
         $(".checkbox-item[data-option='" + filter_option + "']").toggleClass('selected');
 
         add_filter_classes(filter_type, filter_option, filter_label);
+        count_results();
         
     });
 
@@ -388,41 +388,9 @@ $(document).ready(function () {
         $(this).parents('.filter-item').find('.active-filters li[data-option="' + filter_option +'"]').toggleClass('selected ');
   
         add_filter_classes(filter_type, filter_option, filter_label);
-        
-        
+        count_results();
                    
     }); 
-    
-    
-    // Function to add classes for hiding and showing filtered results (button items)
-    var add_filter_classes_2= function(filter_type, filter_option, filter_label){
-            
-        var show_class = filter_type + "-show";
-        var hide_class = filter_type + "-hide";
-        var parent = $("label[data-option='" + filter_option + "']").parents('.text-field-item');
-        var grandparent = $("label[data-option='" + filter_option + "']").parents('.filter-item').attr('ID');
-
-        
-        if($("#" + filter_type + " .text-field-tem.selected").length === 0) {
-            
-            console.log($("#" + filter_type + " .text-field-item"));
-            $(".search-card-result").each(function(){
-                $(this).removeClass(hide_class);
-                $(this).removeClass(show_class);
-            });
-        } else {
-           
-            $(".search-card-result").each(function(){
-                console.log($("#" + filter_type + " .text-field-item"));
-                if (!$(this).hasClass(show_class)) {
-                    $(this).addClass(hide_class);
-                }
-            });
-        }         
-        
-    };
-   
-   
     
     
     // Select filter text input options (postcode field)
@@ -434,9 +402,7 @@ $(document).ready(function () {
         var filter_label = $(this).parents(".filter-item-content").find("label").attr('data-label');
         var filter_type = $(this).parents('.filter-item').attr('ID');
         var postcode_val = $(this).parents('.filter-item-content').find('input').val();
-        
-        
-        
+   
         $(this).parents('.text-field-filter').find('.active-filters li').text(postcode_val).addClass('selected');
         $(this).parents('.text-field-item').addClass('selected');
         
@@ -444,8 +410,21 @@ $(document).ready(function () {
         sessionStorage.setItem(filter_type + "_value", postcode_val);
         sessionStorage.setItem(filter_type, 1);
         
-        add_filter_classes_2(filter_type, filter_option, filter_label);
+        var show_class = filter_type + "-show";
+        var hide_class = filter_type + "-hide";
         
+         
+        $(".search-card-result").each(function(){
+           
+            if ( $(this).hasClass(filter_type)) {
+                $(this).addClass(show_class);
+            } else {
+                $(this).addClass(hide_class);
+            }
+            }); 
+        
+        count_results();
+         
     });
     
     $(".text-select li").on('click', function(){
@@ -462,9 +441,60 @@ $(document).ready(function () {
         $(this).removeClass('selected');
         $(this).parents('.filter-item').find('.text-field-item').removeClass('selected');
         
+        var show_class = filter_type + "-show";
+        var hide_class = filter_type + "-hide";
+        
+        $(".search-card-result").each(function(){
+                $(this).removeClass(hide_class);
+                $(this).removeClass(show_class);
+            });
+        
+        count_results();
+        
     });
     
 
+    //CREATE 'SHOWING' NUMBER
+    var showing = sessionStorage.getItem('showing');
+    
+    if (showing === null) {
+        showing = 86;
+    }
+    
+    $('span.number').text(showing);
+    
+    // LIMIT NUMBER OF SEARCH CARDS DISPLAY
+    var count_results = function(){
+        var count = 0;
+        $('.search-card-result').each(function(){
+            $(this).removeClass('hidden');
+        });
+        $('.search-card-result:visible').each(function(){
+            count++;
+            
+            if (count > 10) {
+                $(this).addClass('hidden');
+            } 
+        });
+        console.log(count);
+        
+        if(count < 11) {
+            $('.pagination-wrapper').css('display', 'none');
+            $('.page-number-wrapper').css('display', 'none');
+            
+            $('span.number').text(count);
+        } else {
+            $('.pagination-wrapper').css('display', 'block');
+            $('.page-number-wrapper').css('display', 'block');
+            
+           
+            var new_showing = Math.floor(Math.random() * 21) + 50;
+            $('span.number').text(new_showing);
+        }
+        
+    };
+    count_results();
+    
     
     
     // MOBILE FILTER VISIBILITY
@@ -521,125 +551,58 @@ $(document).ready(function () {
         clear_filters();
     });
     
-    
-    
-    
+
         
     // SET ACTIVE FILTERS ON PAGE LOAD - MULTIPLE SELECT
     $('#postcode .active-filters li').text(sessionStorage.getItem('postcode_value'));
     
     var filter_set_multiple = ['in-person-events', 'online-events', 'past-recorded-events', 'business-finance', 'business-planning', 'contracting-and-tendering', 'customer-service', 'digital-business', 'employing-people', 'exporting', 'government-grant-programs', 'industry-compliance', 'innovation-and-commercialisation', 'marketing', 'networking', 'starting-a-business', 'taxation-and-record-keeping', 'work-health-and-safety', 'past-mmonths', 'this-month', 'this-month-plus-1', 'this-month-plus-2', 'this-month-plus-3', 'postcode_status'];
     
+    var add_classes_on_load = function(item){
+        $(item).each(function(){
+            if ( $(this).hasClass(filter_option) ) {
+                $(this).addClass(show_class);
+            } 
+            else {
+                $(this).addClass(hide_class);
+            }
+        });
+    };
     for ( var filter = 0; filter < filter_set_multiple.length; filter++) {
         
-        var filter_option = filter_set_multiple[filter];
-            
+        var filter_option = filter_set_multiple[filter];    
+        
             if (sessionStorage.getItem(filter_option) === "true") {  
             
                 // Select filters on the page  
+                console.log(filter_option);
+                var filter_type =$('.active-filters li[data-option="' + filter_option + '"]').attr('filter-type');
+                if (!filter_type) {
+                    filter_type =  $('label[data-option="' + filter_option + '"]').attr('filter-type');
+                }
+                
+                var show_class = filter_type + "-show";
+                var hide_class = filter_type + "-hide";
+                console.log(show_class);
+                console.log(hide_class);
+            
                 $('.active-filters li[data-option="' + filter_option + '"]').toggleClass('selected');    
                 $('label[data-option="' + filter_option + '"]').parent('.checkbox-item').toggleClass('selected');
                 
+                add_classes_on_load('.search-card-result');
             }
-    }
-    
-
-   
-    
-
-    //CREATE 'SHOWING' NUMBER
-    var showing = sessionStorage.getItem('showing');
-    
-    if (showing === null) {
-        showing = 131;
-    }
-    /*if(sessionStorage.getItem('name-filter') !== null) {
-        console.log(sessionStorage.getItem('name-filter'));
-        sessionStorage.removeItem('name-filter');
-        showing = 131;
-    }*/
-    $('span.number').text(showing);
-    
-    
-    
-    // VARY SEARCH RESULT CARDS ON DISPLAY
-    
-    // Create variables for storing search card ids 
-    /*var card_ids_task_1 = ["#search-result-1", "#search-result-2", "#search-result-3", "#search-result-4", "#search-result-5", "#search-result-6", "#search-result-7", "#search-result-8", "#search-result-9", "#search-result-10"];
-    var card_ids_task_2 = ["#search-result-11", "#search-result-12", "#search-result-13", "#search-result-14", "#search-result-15", "#search-result-16", "#search-result-17", "#search-result-18", "#search-result-19", "#search-result-20"];
-    
-    // Create sets of card HTML
-    var search_cards_task_1 = {};
-    var search_cards_task_2 = {};
-
-    var create_card_set = function(card_identifiers, card_set, cards){
-        $(card_identifiers).each(function(){
-            cards['#' + $(this).attr('id')] = $(this).html();
-        }); 
-    };
-    
-    create_card_set('.result-task-1', card_ids_task_1, search_cards_task_1);  
-    create_card_set('.result-task-2', card_ids_task_2, search_cards_task_2);  
-    
-    // Function to shuffle the id order in their array
-    function Shuffle(o) {
-        for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-        return o;
-    }
-    
-    // Function to rearrange cards on display. Uses presence sessionStorage('purchase-or-upgrade-equipment-vehicles-or-tools') to determine whether cards are from the Task_1 or Task_2 set.
-    function rearrange_cards(){
-    
-        $('.results-wrapper').empty();
-        var task2 = sessionStorage.getItem('purchase-or-upgrade-equipment-vehicles-or-tools');
         
-        if (task2 === 'true') {
-            var shuffled_cards_2 = Shuffle(card_ids_task_2);
-            for (var id_1 = 0; id_1 < shuffled_cards_2.length; id_1++) {
-                $('.results-wrapper').append('<div class="search-card-result">' + search_cards_task_2[shuffled_cards_2[id_1]] + '</div>');
-            }
-        } else {
-            var shuffled_cards_1 = Shuffle(card_ids_task_1);
-            for (var id_2 = 0; id_2 < shuffled_cards_1.length; id_2++) {
-                $('.results-wrapper').append('<div class="search-card-result">' + search_cards_task_1[shuffled_cards_1[id_2]] + '</div>');
-            }
-        }  
+        count_results();
     }
-    
-    // Rearrange cards on filter click
-    $('[filter-type]').on('click', function(){
-        rearrange_cards();
-    });
-    
-    $('[select-filter-type]').change(function(){
-        rearrange_cards();
-    });
-    
-    $('[toggle-filter-type]').change(function(){
-        rearrange_cards();
-    });
-    
-    // Rearrange cards on page load (so the task remains consistent across tool sections once it is selected).
-    rearrange_cards();
-    */
+
     
     
-    // PERSISTENT SHOWING NUMBER  
-    /*if ($('.showing-results').length) {
-        var showing_position = $('.results-title').offset();
-        $(window).scroll(function () {
-            if ($(window).scrollTop() > showing_position.top) {
-                $('.results-title-wrapper').addClass('sticky');
-                $('.filter-and-results-wrapper').addClass('sticky');
-            } else {
-                $('.results-title-wrapper').removeClass('sticky');
-                $('.filter-and-results-wrapper').removeClass('sticky');
-            }
-        });
-    } 
-    */
+
     
     
+    
+
+
     
     // SET DYNAMIC MONTHS
     var date = new Date(),
@@ -666,11 +629,6 @@ $(document).ready(function () {
     });
 
     
-    // MOCK FILTERING BEHAVIOUR
-    // Event-type filtering
-    $("#event-type .checkbox-item label").on('click', function(){
-        
-    });
     
 }); // END doc ready
 
