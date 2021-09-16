@@ -392,6 +392,52 @@ $(document).ready(function () {
                    
     }); 
     
+    // On demand click disables date filter  
+    $('#event-type .checkbox-item').on('click', function(){
+        //console.log('selected');
+        
+        if ( $('label[data-option="past-recorded-events"]').parents('.checkbox-item').hasClass('selected') ) {
+            //console.log('past recorded selected');
+            
+            if ($('label[data-option="in-person-events"]').parents('.checkbox-item').hasClass('selected') || $('label[data-option="online-events"]').parents('.checkbox-item').hasClass('selected')) {
+                //console.log('I am NOT the one and only');
+                $("#date").removeClass('hidden');
+                $("#date").slideDown();
+            } else {
+                //console.log("It is just me out here");
+                $("#date").addClass('hidden');
+                $("#date .checkbox-item").each(function(){
+                    $(this).removeClass('selected');
+                });
+                
+                $('li[filter-type="date"]').each(function(){
+                    $(this).removeClass('selected');
+                });
+                
+                var filter = "date";
+                var date_options  = ["this-month", "this-month-plus-1", "this-month-plus-2"];
+                
+                sessionStorage.setItem('date', 0);
+                for ( var j = 0; j < date_options.length; j++){ 
+                    sessionStorage.removeItem(date_options[j]);
+                }
+                $('.search-card-result').each(function(){
+                    $(this).removeClass('date-hide date-show');
+                });
+                $('#date .filter-item-title').removeClass('open');
+                $('#date .filter-item-content').slideUp();
+                $('#date').slideUp();
+                
+                
+                count_results();
+                
+            }
+        } else {
+            $("#date").removeClass('hidden');
+            $("#date").slideDown();
+        }
+    });
+    
     
     // Select filter text input options (postcode field)
     $('.text-field-filter button').on('click', function(){
@@ -489,6 +535,12 @@ $(document).ready(function () {
            
             var new_showing = Math.floor(Math.random() * 21) + 50;
             $('span.number').text(new_showing);
+        }
+        
+        if (count === 0) {
+            $('.no-results').addClass('show');
+        } else {
+            $('.no-results').removeClass('show');
         }
         
     };

@@ -106,6 +106,9 @@
                 .mobile-counter {
                     display: none;
                 }
+                &.hidden {
+                    //display: none;
+                }
 
                 .filter-item-title {
                     position: relative;
@@ -560,7 +563,7 @@
                 
             }
             &.topic-hide {
-                display: hide;
+                display: none;
             }
             &.postcode-show {
                 display: block;
@@ -839,25 +842,24 @@
             }
             
         }
-        /*&.unfiltered {
-            .search-card-result {
+        
+        .no-results {
+            
+            display: none;
+            
+            &.show {
                 display: block;
             }
-        }*/
-        /*&.date-filtered {
-            .search-card-result {
-                display: none;
+            h3 {
+                padding-top: 0;
             }
-            .date-show {
-                display: block;
+            a {
+                color: $blue-primary-mid;
+                text-decoration: underline;
+                font-weight: 600;
             }
-            .month-show {
-                display: none;
-            }
-            .date-show.month-show {
-                display: block;
-            }
-        }*/
+        }
+        
         
         @media(max-width: 767px) {
             .search-card-content .top-row {

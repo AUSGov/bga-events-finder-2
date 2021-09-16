@@ -4349,8 +4349,6 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .clear-filters svg { position: absolute; top: 4px; right: -24px; }
 
-#events-finder .results-section .filter-and-results-wrapper .results-wrapper { /*&.unfiltered { .search-card-result { display: block; } }*/ /*&.date-filtered { .search-card-result { display: none; } .date-show { display: block; } .month-show { display: none; } .date-show.month-show { display: block; } }*/ }
-
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .result-task-1 { display: block; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .result-task-2 { display: none !important; }
@@ -4387,7 +4385,7 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-show.postcode-hide { display: none; }
 
-#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-hide { display: hide; }
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.topic-hide { display: none; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.postcode-show { display: block; }
 
@@ -4472,6 +4470,14 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.past-recorded-events .search-card-content { background-color: #DFE2EE; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.past-recorded-events .search-card-header { background-color: #495C74; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .no-results { display: none; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .no-results.show { display: block; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .no-results h3 { padding-top: 0; }
+
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper .no-results a { color: #4569A0; text-decoration: underline; font-weight: 600; }
 
 @media (max-width: 767px) { #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-content .top-row .search-card-content-type { margin-top: 32px; width: 100%; position: relative; } }
 
