@@ -511,6 +511,10 @@
             box-shadow: none;
             box-sizing: border-box;
             display: block;
+            
+            &#search-result-Z.no-filters {
+                display: none !important;
+            }
         
             &.hidden {
                 display: none !important;

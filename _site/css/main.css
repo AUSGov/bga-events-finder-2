@@ -4355,6 +4355,8 @@ html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result { border-top: none; padding: 0px; margin-bottom: 32px; box-shadow: none; box-sizing: border-box; display: block; }
 
+#events-finder .results-section .filter-and-results-wrapper .results-wrapper #search-result-Z.search-card-result.no-filters { display: none !important; }
+
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.hidden { display: none !important; }
 
 #events-finder .results-section .filter-and-results-wrapper .results-wrapper .search-card-result.event-type-show { display: block; }

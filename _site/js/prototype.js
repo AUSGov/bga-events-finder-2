@@ -240,41 +240,97 @@ $(document).ready(function () {
     
     // FUNCTION TO COUNT and SET active filter counts
     var all_filter_types = ['event-type', 'date', 'topic', 'postcode'];
-    /*var total_active_filters = function(){
-        
-        
-        var total_active = sessionStorage.getItem("total_active");
-       
-        if (total_active === null) {
-            total_active = 0;
-        }
-        
-        for ( var k = 0; k < all_filter_types.length; k++){ 
-            
-            var filter_type = all_filter_types[k];
-            var filter_count = parseInt(sessionStorage.getItem(filter_type));
-            
-            if(isNaN(filter_count)) {
-                filter_count = 0;  
-            }
-            
-        }
-         
-        sessionStorage.setItem("total_active", total_active);
-        //$('.filter-counter').text(total_active);
-        
-      
-        return total_active;
-    };*/
-    
- 
+    var subcategory_filters = ['date', 'topic', 'location'];
+   
 
-    // SET FILTER COUNT ON PAGE LOAD
-    //total_active_filters();
+    var add_filter_classes= function(filter_type, filter_option, filter_label){
+        var show_class = filter_type + "-show";
+        var hide_class = filter_type + "-hide";
+        var parent = $("label[data-option='" + filter_option + "']").parents('.checkbox-item');
+        var grandparent = $("label[data-option='" + filter_option + "']").parents('.filter-item').attr('ID');
+        
+        $(".search-card-result").each(function(){
+            $(this).removeClass(show_class);   
+            $(this).removeClass(hide_class);    
+        }); 
+        
+        var selected_items = [];
+        $('#'+grandparent + " .checkbox-item.selected").each(function(){  
+            var item = $(this).attr('data-label');
+            selected_items.push(item);    
+        });
+        
+        //console.log(selected_items);
+
+              
+        $(".search-card-result").each(function(){
+             
+            for (var m = 0; m < selected_items.length; m++ ) {
+                if ($(this).hasClass(selected_items[m])) {  
+                    $(this).addClass(show_class);
+                    $(this).removeClass(hide_class);
+                }
+            }
+        });
+        
+        $(".search-card-result").each(function(){
+           
+            if( selected_items.length === 0 ) {
+                $(this).removeClass(hide_class);
+                $(this).removeClass(show_class);
+            } else {
+                if (!$(this).hasClass(show_class) ) {
+                   $(this).addClass(hide_class);
+                } 
+            }   
+        });
+        
+        var filter_count = sessionStorage.getItem(grandparent);
+        
+        if(filter_count === null) {
+            filter_count = 0;
+        }
+        
+        if(parent.hasClass('selected')) { 
+            sessionStorage.setItem(filter_option, "true");
+            filter_count = +filter_count  +1;
+            sessionStorage.setItem(grandparent, filter_count);
+        
+        } else {
+            sessionStorage.removeItem(filter_option);
+            filter_count = +filter_count  -1;
+            sessionStorage.setItem(grandparent, filter_count);    
+        }
+       
+    };
+    
+    // FUNCTION TO HIDE SHOW SPECIFIC TASK RESULT
+    var task_result_display = function(filter_types, result_item){
+        
+        var active_count = 0;
+        for ( var k = 0; k < filter_types.length; k++) {
+            var filter_state = sessionStorage.getItem(filter_types[k]);
+            
+            if (filter_state > 0) {
+                
+                active_count = parseInt(active_count, 10) + parseInt(filter_state, 10);
+            }
+        }
+        console.log(active_count);
+        
+        if (active_count === 0) {
+            $(result_item).addClass('no-filters');
+        } else if (active_count > 0 ) {
+            $(result_item).removeClass('no-filters');
+        }
+    };
+    
+     
+    
     
     
     // FUNCTION TO ADD CLASSES FOR FILTERING RESULTS (checkbox items)
-    var add_filter_classes= function(filter_type, filter_option, filter_label){
+    /*var add_filter_classes= function(filter_type, filter_option, filter_label){
         
         var show_class = filter_type + "-show";
         var hide_class = filter_type + "-hide";
@@ -333,6 +389,7 @@ $(document).ready(function () {
         }         
         
     };
+    */
     
      
 
@@ -371,6 +428,7 @@ $(document).ready(function () {
 
         add_filter_classes(filter_type, filter_option, filter_label);
         count_results();
+        task_result_display(subcategory_filters, "#search-result-Z");
         
     });
 
@@ -389,6 +447,7 @@ $(document).ready(function () {
   
         add_filter_classes(filter_type, filter_option, filter_label);
         count_results();
+        task_result_display(subcategory_filters, "#search-result-Z");
                    
     }); 
     
@@ -397,14 +456,11 @@ $(document).ready(function () {
         //console.log('selected');
         
         if ( $('label[data-option="past-recorded-events"]').parents('.checkbox-item').hasClass('selected') ) {
-            //console.log('past recorded selected');
             
             if ($('label[data-option="in-person-events"]').parents('.checkbox-item').hasClass('selected') || $('label[data-option="online-events"]').parents('.checkbox-item').hasClass('selected')) {
-                //console.log('I am NOT the one and only');
                 $("#date").removeClass('hidden');
                 $("#date").slideDown();
             } else {
-                //console.log("It is just me out here");
                 $("#date").addClass('hidden');
                 $("#date .checkbox-item").each(function(){
                     $(this).removeClass('selected');
@@ -442,8 +498,6 @@ $(document).ready(function () {
     // Select filter text input options (postcode field)
     $('.text-field-filter button').on('click', function(){
         
-        //total_active_filters();
-        
         var filter_option = $(this).parents(".filter-item-content").find("label").attr('data-option');
         var filter_label = $(this).parents(".filter-item-content").find("label").attr('data-label');
         var filter_type = $(this).parents('.filter-item').attr('ID');
@@ -451,6 +505,8 @@ $(document).ready(function () {
    
         $(this).parents('.text-field-filter').find('.active-filters li').text(postcode_val).addClass('selected');
         $(this).parents('.text-field-item').addClass('selected');
+        
+        $('#search-result-Z').removeClass('no-filters');
         
         sessionStorage.setItem(filter_option, true);
         sessionStorage.setItem(filter_type + "_value", postcode_val);
@@ -474,8 +530,6 @@ $(document).ready(function () {
     });
     
     $(".text-select li").on('click', function(){
-        
-        //total_active_filters();
         
         var filter_type = $(this).parents('.filter-item').attr('id');
         var filter_option = $(this).attr('data-option');
